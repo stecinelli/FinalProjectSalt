@@ -64,7 +64,7 @@ useEffect(() => {
 
 
 const onClickReset = () => {
-    clearTimer(getDeadTime());
+    clearTimer(getDeadTime());}
 
 
     return (
@@ -74,7 +74,7 @@ const onClickReset = () => {
             <button onClick={onClickReset}>Reset</button>
         </div>
     )
-}}
+}
 
 
 export default Timer
