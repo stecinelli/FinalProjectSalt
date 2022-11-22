@@ -1,10 +1,16 @@
 import './App.css';
+import FunnyWish from './Components/FunnyWish';
+import Sound from './Components/Sound';
 import Timer from './Components/Timer';
+import Names from './Components/Names';
+
 function App() {
   return (
     <div className="App">
-
-<Timer />
+      <h3>Hello Kitties!</h3>
+      <Sound/>
+      <Timer/>
+      <FunnyWish/>
     </div>
   );
 }
