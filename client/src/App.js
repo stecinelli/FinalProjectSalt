@@ -9,10 +9,10 @@ function App() {
   return (
     <div className="App">
       <h3>Hello Kitties!</h3>
-      <Sound/>
-      <Timer/>
+      <Sound />
+      <Timer />
       <Names />
-      <FunnyWish/>
+      <FunnyWish />
     </div>
   );
 }

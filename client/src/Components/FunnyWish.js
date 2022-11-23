@@ -19,21 +19,21 @@ function FunnyWish() {
         //         setErrorMessage("Unable to fetch cat");
         //         setIsLoading(false);
         //     });
-        console.log(mockData)
+        // console.log(mockData)
         setCat(mockData)
-        console.log(cat, 'mock')
+        // console.log(cat, 'mock')
     };
 
     useEffect(() => {
         if (!cat.length) {
             handleFetch()
-            console.log(cat, 'mock2')
+            // console.log(cat, 'mock2')
         }
     }, [])
 
-    setTimeout(
-        console.log(cat, '5sec'), 5000
-    )
+    // setTimeout(
+    //     console.log(cat, '5sec'), 5000
+    // )
     return (
         <div><img src={mockData[0].img} alt="cat" width="300"  />
         <p>Good luck, Paula!</p>

@@ -1,21 +1,45 @@
 import React from 'react'
 import Input from './InputContainer'
+import Cards from './Cards'
 import { v4 as uuidv4 } from 'uuid'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
+const LOCAL_STORAGE_KEY = 'final_project';
 
 const Names = () => {
   const [names, setNames] = useState([])
 
-  const addMember = member => {
+  useEffect(() => {
+    const nameStorage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if (nameStorage) {
+      setNames(nameStorage)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(names))
+  }, [names])
+
+  const addName = name => {
     const id = uuidv4()
-    console.log(id)
+    setNames([...names, {id,name}])
   }
-  addMember()
+  // console.log(names)
+
+  const deleteName = id => {
+    setNames(names.filter(person => person.id !== id))
+  }
+
 
   return (
     <div className='name-list'>
-      <Input />
+      <Input 
+        names={names}
+        addName={addName}/>
+      <Cards 
+        names={names}
+        deleteName={deleteName}
+        />
     </div>
   )
 }
