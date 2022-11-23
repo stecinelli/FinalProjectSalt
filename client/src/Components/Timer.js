@@ -1,80 +1,61 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 
 const Timer = () => {
+    const initialCounter = 250
     const Ref = useRef(null);
-    const [timer, setTimer] = useState('00:00');
+    const [playing, setPlaying] = useState(false)
+    const [counter, setCounter] = useState(initialCounter);
+    const formatTimer = (count) => {
+        const mins = Math.floor(count / 60)
+        const seconds = count % 60;
 
-    const getTimeRemaining = (e) => {
-        const total = Date.parse(e) - Date.parse(new Date());
-        const seconds = Math.floor((total / 1000) % 60);
-        const minutes = Math.floor((total / 1000 / 60) % 60);
-        return {
-            total, minutes, seconds
-        };
+
+        return (mins > 9 ? mins : '0' + mins) + ':'
+            + (seconds > 9 ? seconds : '0' + seconds);
     }
 
-    const startTimer = (e) => {
-        let { total, minutes, seconds }
-            = getTimeRemaining(e);
-        if (total >= 0) {
+    const startTimer = () => {
 
-            setTimer(
-                (minutes > 9 ? minutes : '0' + minutes) + ':'
-                + (seconds > 9 ? seconds : '0' + seconds)
-            )
-        }
+        if (Ref.current) clearInterval(Ref.current);
+
+        const id = setInterval(() => {
+            setCounter(count => count - 1);
+        }, 1000)
+
+        Ref.current = id;
+        setPlaying(true)
     }
+    const pauseTimer = () => {
+        if (Ref.current) clearInterval(Ref.current)
+        setPlaying(false)
+    }
+
     const stopTimer = () => {
-        setTimer('00:10');
-        document.querySelector('#counter').remove()
+
+        pauseTimer()
+        setCounter(initialCounter)
     }
+    
+    
+    
+    let button;
+    if (playing) {
+        button = <button onClick={pauseTimer}>Pause</button>;
 
-
-
-const clearTimer = (e) => {
-
-
-    setTimer('00:10');
-
-    if (Ref.current) clearInterval(Ref.current);
-    const id = setInterval(() => {
-        startTimer(e);
-    }, 1000)
-    Ref.current = id;
-}
-
-const getDeadTime = () => {
-    let deadline = new Date();
-
-    // This is where you need to adjust if 
-    // you entend to add more time
-    deadline.setSeconds(deadline.getSeconds() + 10);
-    return deadline;
-}
-
-// // We can use useEffect so that when the component
-// // mount the timer will start as soon as possible
-
-// // We put empty array to act as componentDid
-// // mount only
-useEffect(() => {
-    clearTimer(getDeadTime());
-}, []);
-
-
-const onClickReset = () => {
-    clearTimer(getDeadTime());}
-
+    } else {
+        button = <button onClick={startTimer}>Start</button>;
+    }
 
     return (
-        <div className="App">
-            <h2>{timer}</h2>
+        <div>
+            <div>{formatTimer(counter)}</div>
             <button onClick={stopTimer}>STOP</button>
-            <button onClick={onClickReset}>Reset</button>
+            {button}
+
         </div>
+
     )
 }
-
 
 export default Timer
