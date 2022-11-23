@@ -11,6 +11,7 @@ function FunnyWish() {
         setImageUrl("https://cataas.com/cat")
     }
     useEffect(() => {
+
         if (!imgIsChanged) {
             setImageUrl("https://cataas.com/cat")
             setImgIsChanged(true)

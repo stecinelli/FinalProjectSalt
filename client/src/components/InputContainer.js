@@ -1,14 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
 
-const Input = () => {
+const Input = ({ addName }) => {
   // const [input, setInput] = useState('')
-  const [name, setName] = useState('')
+  const [inputValue, setInputValue] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
-
-    console.log(name)
+    addName(inputValue)
+    setInputValue('')
+    // console.log('mammamia',inputValue)
   }
 
   return (
@@ -19,8 +20,8 @@ const Input = () => {
         className='name-list__input'
         type='text'
         placeholder='Add new member'
-        value={name}
-        onChange={e => setName(e.target.value)}
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
       />
       <button
         className='name-list__button'
