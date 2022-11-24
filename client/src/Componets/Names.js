@@ -8,6 +8,7 @@ const LOCAL_STORAGE_KEY = 'final_project';
 
 const Names = () => {
   const [names, setNames] = useState([])
+  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     const nameStorage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
@@ -22,9 +23,9 @@ const Names = () => {
 
   const addName = name => {
     const id = uuidv4()
-    setNames([...names, {id,name}])
+    setNames([...names, {id, name, isActive}])
   }
-  // console.log(names)
+  console.log(isActive)
 
   const deleteName = id => {
     setNames(names.filter(person => person.id !== id))
@@ -36,7 +37,9 @@ const Names = () => {
       <Input 
         names={names}
         addName={addName}/>
-      <Cards 
+      <Cards
+        setIsActive={setIsActive}
+        setNames={setNames}
         names={names}
         deleteName={deleteName}
         />

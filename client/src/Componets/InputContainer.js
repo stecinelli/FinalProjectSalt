@@ -2,14 +2,12 @@ import React from 'react'
 import { useState } from 'react'
 
 const Input = ({ addName }) => {
-  // const [input, setInput] = useState('')
   const [inputValue, setInputValue] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
     addName(inputValue)
     setInputValue('')
-    // console.log('mammamia',inputValue)
   }
 
   return (

@@ -1,22 +1,34 @@
-import React from 'react'
-// import { MdDelete } from "react-icons/md";
+import React, { useState } from 'react'
+import { MdDelete } from "react-icons/md";
 
-const Card = ({ person, deleteName, id }) => {
+const Card = (props) => {
+const { setNames, names, person, deleteName, id, setIsActive, innerRef, ...extraProps} = props
+// const [ memberIsActive, setMemberIsActive ] = useState(isActive)
 
-  // const dragStarted = (e, id) => {
-  //   e.dataTansfer.setData('nameId', id)
-  //   console.log('drag has begun');
-  // }
+const handleClickTurn = (e) => {
+  e.preventDefault()
+  setIsActive(true)
+  console.log('first')
+  // setNames(names.filter(person => person.id === id).isActive)
+  
+}
+
+// const makePersonActive = id => {
+//   isActiv = True
+// }
+
+// const deleteName = id => {
+//   setNames(names.filter(person => person.id !== id))
+// }
 
   return (
 
     <li className='name-list__card'
-      draggable={true}
-      // onDragStart={(e) => dragStarted(e, id)}
+    onClick={handleClickTurn}
+    {...extraProps} ref={innerRef}
       >
       {person}
-      {/* <button onClick={() => console.log('my print',id)}>Dupa</button> */}
-      {/* <MdDelete
+      <MdDelete
         style={{color: 'red', cursor: 'pointer'}}
         onClick={() => deleteName(id)}
       /> */}
