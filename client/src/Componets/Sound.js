@@ -1,18 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Sound = () => {
-const [soundList, setSoundList] = useState([
-  {name: 'Sound1', url: 'http://localhost:8000/files/sound1.m4a'},
-  {name: 'Sound2', url: 'http://localhost:8000/files/sound2.m4a'},
-  {name: 'Sound3', url: 'http://localhost:8000/files/sound3.m4a'},
-])
-const [playSound, setPlaySound] = useState([])
+  const [soundList, setSoundList] = useState([])
+  const [soundToPlay, setSoundToPlay] = useState([])
 
-const getSoundFunction = e => {
-  const newPlaySong = soundList.filter(song => song.name === e.target.value);
-  setPlaySound(newPlaySong)
-  // console.log(newPlaySong)
-}
+  useEffect(() => {
+    fetch('/sounds/archive.json')
+      .then(result => result.json())
+      .then(result => setSoundList(result))
+  }, [])
+
+  useEffect(() => {
+    if(soundList.length > 0) setSoundToPlay([soundList[0]])
+  }, [soundList])
+
+  const getSoundFunction = e => {
+    const newPlaySong = soundList.filter(song => song.title === e.target.value);
+    setSoundToPlay(newPlaySong)
+  }
+
+  const playSound = () => {
+    document.getElementById('player').play()
+  };
 
   return (
     <div className='Sound'>
@@ -22,13 +31,18 @@ const getSoundFunction = e => {
         className='Sound-selector' >
         {soundList && soundList.map((sound, index) =>
           <option
-            key={sound.name + index}
-            value={sound.name} >
-            {sound.name}
+            key={sound.title + index}
+            value={sound.title} >
+            {sound.title}
           </option>
         )}
       </select>
-      {/* <audio controls src={playSound[0].url}></audio> */}
+      {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
+        <>
+        <audio id='player' src={soundToPlay[0].url}></audio>
+        <button onClick={playSound}>Play</button>
+        </>
+      }
     </div>
   )
 }

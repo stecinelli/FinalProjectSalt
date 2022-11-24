@@ -1,5 +1,5 @@
 import React from 'react'
-import { MdDelete } from "react-icons/md";
+// import { MdDelete } from "react-icons/md";
 
 const Card = ({ person, deleteName, id }) => {
 
@@ -9,17 +9,17 @@ const Card = ({ person, deleteName, id }) => {
   // }
 
   return (
-    
+
     <li className='name-list__card'
       draggable={true}
       // onDragStart={(e) => dragStarted(e, id)}
       >
       {person}
       {/* <button onClick={() => console.log('my print',id)}>Dupa</button> */}
-      <MdDelete
+      {/* <MdDelete
         style={{color: 'red', cursor: 'pointer'}}
         onClick={() => deleteName(id)}
-      />
+      /> */}
     </li>
   )
 }
