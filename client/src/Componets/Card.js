@@ -31,7 +31,7 @@ const handleClickTurn = (e) => {
       <MdDelete
         style={{color: 'red', cursor: 'pointer'}}
         onClick={() => deleteName(id)}
-      /> */}
+      /> 
     </li>
   )
 }

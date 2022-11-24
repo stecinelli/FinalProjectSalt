@@ -1,43 +1,49 @@
+* {
+  border: 1px solid grey;
+  margin: 0;
+  box-sizing: border-box;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: rgb(219, 255, 255);
   display: flex;
   flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
+}
+.hello{
+  background-color: rgb(255, 238, 218);
+}
+.Sound {
+  background-color: rgb(255, 203, 203);
+}
+.timer {
+  background-color: rgb(187, 187, 255);
+}
+.names-and-wish-container {
+  background-color: rgb(250, 215, 215);
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 2rem;
 }
-
-.App-link {
-  color: #61dafb;
+.name-list {
+  background-color: rgb(219, 181, 255);
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 2rem;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .name-list__card {
   list-style: none;
   cursor: move;
+}
+.funnyWish {
+  background-color: rgb(240, 255, 245);
+  width: 50%;
+}
+.image {
+  width: 80%;
 }

@@ -29,14 +29,14 @@ function FunnyWish() {
     };
 
     useEffect(() => {
-        if (!savedCat) {
+        if (savedCat.length === 0) {
             handleFetch()
         }
     }, [])
 
     return (
-        <div>
-            {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" />}
+        <div className='funnyWish'>
+            {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" className='image'/>}
             <p >Good luck, {name}!</p>
             <button onClick={handleFetch}>click</button>
         </div>

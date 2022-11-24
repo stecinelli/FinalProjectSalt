@@ -34,15 +34,15 @@ const Names = () => {
 
   return (
     <div className='name-list'>
-      <Input 
-        names={names}
-        addName={addName}/>
       <Cards
         setIsActive={setIsActive}
         setNames={setNames}
         names={names}
         deleteName={deleteName}
         />
+        <Input 
+        names={names}
+        addName={addName}/>
     </div>
   )
 }

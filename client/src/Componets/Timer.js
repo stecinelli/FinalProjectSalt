@@ -48,7 +48,7 @@ const Timer = () => {
     }
 
     return (
-        <div>
+        <div className='timer'>
             <div>{formatTimer(counter)}</div>
             <button onClick={stopTimer}>STOP</button>
             {button}

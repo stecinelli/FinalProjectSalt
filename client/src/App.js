@@ -9,14 +9,16 @@ import Names from './Componets/Names';
 // import Names from './Components/Names';
 
 function App() {
-  
+
   return (
     <div className="App">
-      <h3>Hello Kitties!</h3>
+      <h3 className='hello'>Hello Kitties!</h3>
       <Sound />
       <Timer />
-      <Names />
-      <FunnyWish />
+      <div className='names-and-wish-container'>
+        <Names />
+        <FunnyWish />
+      </div>
     </div>
   );
 }
