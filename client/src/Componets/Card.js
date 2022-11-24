@@ -22,7 +22,7 @@ const handleClickTurn = (e) => {
 // }
 
   return (
-    
+
     <li className='name-list__card'
     onClick={handleClickTurn}
     {...extraProps} ref={innerRef}
@@ -31,7 +31,7 @@ const handleClickTurn = (e) => {
       <MdDelete
         style={{color: 'red', cursor: 'pointer'}}
         onClick={() => deleteName(id)}
-      />
+      /> */}
     </li>
   )
 }
