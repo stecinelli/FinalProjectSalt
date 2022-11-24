@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 
 function FunnyWish() {
 
-    const saveToLocalStorage = (obj, key = 'toDoList') => window.localStorage.setItem(key, JSON.stringify(obj));
-    const getFromLocalStorage = (key = 'toDoList') => JSON.parse(window.localStorage.getItem(key));
+    const saveToLocalStorage = (obj, key = 'cat') => window.localStorage.setItem(key, JSON.stringify(obj));
+    const getFromLocalStorage = (key = 'cat') => JSON.parse(window.localStorage.getItem(key));
+    let savedCat = getFromLocalStorage() || []
 
-    const [catData, setCatData] = React.useState(getFromLocalStorage() || '');
+    const [catData, setCatData] = React.useState(savedCat);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [name, setName] = useState("Paula");
 
     const handleFetch = () => {
         setIsLoading(true);
@@ -17,8 +19,8 @@ function FunnyWish() {
             .then(result => {
                 setCatData(result)
                 setIsLoading(false)
+                saveToLocalStorage(result)
             })
-            .then(saveToLocalStorage(catData))
             .catch(() => {
                 setErrorMessage("Unable to fetch cat");
                 setIsLoading(false);
@@ -27,7 +29,7 @@ function FunnyWish() {
     };
 
     useEffect(() => {
-        if (!catData) {
+        if (!savedCat) {
             handleFetch()
         }
     }, [])
@@ -35,7 +37,7 @@ function FunnyWish() {
     return (
         <div>
             {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" />}
-            <p >Good luck, Paula!</p>
+            <p >Good luck, {name}!</p>
             <button onClick={handleFetch}>click</button>
         </div>
     )
