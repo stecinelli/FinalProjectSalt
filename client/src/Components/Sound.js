@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import playButton from './Buttons/play-button-pink.png'
 
 const Sound = () => {
   const [soundList, setSoundList] = useState([])
@@ -25,7 +26,7 @@ const Sound = () => {
 
   return (
     <div className='Sound'>
-      <label className='Sound-lable' htmlFor='SoundSelector'>Select the sound: </label>
+      <label className='Sound-lable' htmlFor='SoundSelector'>🎶 </label>
       <select name='SoundSelector'
         onChange={getSoundFunction}
         className='Sound-selector' >
@@ -40,7 +41,9 @@ const Sound = () => {
       {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
         <>
         <audio id='player' src={soundToPlay[0].url}></audio>
-        <button onClick={playSound}>Play</button>
+        <button className='Sound-player--button' onClick={playSound}>
+          <img src={playButton} alt='play'/>
+        </button>
         </>
       }
     </div>

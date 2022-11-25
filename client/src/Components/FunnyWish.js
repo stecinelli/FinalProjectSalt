@@ -36,9 +36,11 @@ function FunnyWish() {
 
     return (
         <div className='funnyWish'>
+            <div className='wish-and-button'>
+                <p className='luck'>Good luck, {name}!</p>
+                <button onClick={handleFetch}>New!</button>
+            </div>
             {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" className='image'/>}
-            <p >Good luck, {name}!</p>
-            <button onClick={handleFetch}>click</button>
         </div>
     )
 }

@@ -12,7 +12,7 @@ const Input = ({ addName }) => {
 
   return (
     <form 
-      className='name-list'
+      className='input'
       onSubmit={ onSubmit }>
       <input
         className='name-list__input'
