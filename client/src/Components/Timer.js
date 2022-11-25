@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 
 
 const Timer = () => {
@@ -66,10 +67,30 @@ if (counter === -1) {
     } else {
         button = <button onClick={startTimer}>Start</button>;
     }
+    const increaseCounterMinutes = () => {
+        setCounter(count => count+60)
+    }
+    const decreaseCounterMinutes = () => { 
+        if (counter >= 60) {
+        setCounter(count => count-60)}
+    }
+    const decreaseCounterSeconds = () => { 
+        if (counter >= 1) {
+        setCounter(count => count-1)}
+    }
+    const increaseCounterSeconds = () => {
+        setCounter(count => count+1)
+    }
 
     return (
         <div>
+            <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes}/> 
+            <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds}/> 
+
             <div>{formatTimer(counter)}</div>
+            <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes}/> 
+            <BiCaretDown className='secondsDownButton'onClick={decreaseCounterSeconds}/> 
+            <br></br>
             <button onClick={stopTimer}>STOP</button>
             {button}
         </div>
