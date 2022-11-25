@@ -41,7 +41,7 @@ const Names = () => {
 
 
   return (
-    <div className='name-list'>
+    <div className='input-and-cards'>
       <Input 
         names={names}
         addName={addName}/>

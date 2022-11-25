@@ -11,7 +11,6 @@ const handleClick = (e, id) => {
 
 
   return (
-    <div>
     <li className='name-list__card'
     onClick={() => toggleActivator(id)}
     {...extraProps} ref={innerRef}
@@ -23,7 +22,6 @@ const handleClick = (e, id) => {
         onClick={(e) => handleClick(e, id)}
       />
     </li>
-    </div>
   )
 }
 

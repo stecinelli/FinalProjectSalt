@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
+import playButton from './Buttons/play-button-black.png'
+import stopButton from './Buttons/stop-button-black.png'
+import pauseButton from './Buttons/pause-button-black.png'
 
 
 const Timer = () => {
     //setting initial counter time and transition time
-    const initialCounter = 15
+    const initialCounter = 6
     const transitionTime = 5
     //ref ensures there's only one interval set - you need to assign the interval id to ref to keep track of it
     const Ref = useRef(null);
@@ -18,10 +21,12 @@ if (counter === -1) {
     if (isChanging) {
         setCounter(initialCounter)
         setIsChanging(false)
+        document.getElementById('player').pause()
     }
     else {
         setCounter(transitionTime)
         setIsChanging (true)
+        document.getElementById('player').play()
     }
 }
       }, [counter]);
@@ -61,16 +66,22 @@ if (counter === -1) {
 // for now all we do with playing is set the button
     let button;
     if (playing) {
-        button = <button onClick={pauseTimer}>Pause</button>;
+        button = <button onClick={pauseTimer}>
+          <img src={pauseButton} alt='pause'/>
+        </button>;
 
     } else {
-        button = <button onClick={startTimer}>Start</button>;
+        button = <button onClick={startTimer}>
+          <img src={playButton} alt='play'/>
+        </button>;
     }
 
     return (
-        <div>
+        <div className='Timer'>
             <div>{formatTimer(counter)}</div>
-            <button onClick={stopTimer}>STOP</button>
+            <button onClick={stopTimer}>
+                <img src={stopButton} alt='stop'/>
+            </button>
             {button}
         </div>
     )
