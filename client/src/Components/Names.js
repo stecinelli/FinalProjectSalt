@@ -34,9 +34,7 @@ const Names = () => {
 
   // toggle activator zrob to if statement
   const toggleActivator = (id) => {
-    // setNames(names.map(person => (person.id === id) ? {...person, isActive: !person.isActive} : person))
     setNames(names.map(person => (person.id !== id) ? {...person, isActive: false} : {...person, isActive: true}))
-    // setNames(names.map(person => (person.id === id) ? {...person, isActive: true} : person))
   }
 
 

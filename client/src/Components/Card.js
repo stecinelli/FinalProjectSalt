@@ -2,16 +2,17 @@ import React from 'react'
 import { MdDelete } from "react-icons/md";
 
 const Card = (props) => {
-const { setNames, names, person, deleteName, id, setIsActive, toggleActivator, innerRef, ...extraProps} = props
+const { setNames, names, person, deleteName, id, isActive, toggleActivator, innerRef, ...extraProps} = props
 
 const handleClick = (e, id) => {
   e.stopPropagation()
   deleteName(id)
 }
 
-
   return (
-    <li className='name-list__card'
+
+    <div>
+    <li className={`name-list__card ${isActive === true ? 'card--active' : ''}`}
     onClick={() => toggleActivator(id)}
     {...extraProps} ref={innerRef}
       >

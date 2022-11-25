@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react'
 import playButton from './Buttons/play-button-black.png'
 import stopButton from './Buttons/stop-button-black.png'
 import pauseButton from './Buttons/pause-button-black.png'
+import { BiCaretDown, BiCaretUp } from "react-icons/bi";
+
 
 
 const Timer = () => {
@@ -75,13 +77,31 @@ if (counter === -1) {
           <img src={playButton} alt='play'/>
         </button>;
     }
+    const increaseCounterMinutes = () => {
+        setCounter(count => count+60)
+    }
+    const decreaseCounterMinutes = () => { 
+        if (counter >= 60) {
+        setCounter(count => count-60)}
+    }
+    const decreaseCounterSeconds = () => { 
+        if (counter >= 1) {
+        setCounter(count => count-1)}
+    }
+    const increaseCounterSeconds = () => {
+        setCounter(count => count+1)
+    }
 
     return (
         <div className='Timer'>
+            <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes}/> 
+            <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds}/> 
+
             <div>{formatTimer(counter)}</div>
-            <button onClick={stopTimer}>
-                <img src={stopButton} alt='stop'/>
-            </button>
+            <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes}/> 
+            <BiCaretDown className='secondsDownButton'onClick={decreaseCounterSeconds}/> 
+            <br></br>
+            <button onClick={stopTimer}><img src={stopButton} alt='stop'/></button>
             {button}
         </div>
     )
