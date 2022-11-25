@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Card from './Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const Cards = ({ names, deleteName, setNames, setIsActive }) => {
+const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -30,7 +30,7 @@ const Cards = ({ names, deleteName, setNames, setIsActive }) => {
                         {...provided.dragHandleProps}
                   id={person.id}
                   person={person.name}
-                  setIsActive={setIsActive}
+                  toggleActivator={toggleActivator}
                   deleteName={deleteName}
                   setNames={setNames}
                   names={names}

@@ -1,38 +1,29 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { MdDelete } from "react-icons/md";
 
 const Card = (props) => {
-const { setNames, names, person, deleteName, id, setIsActive, innerRef, ...extraProps} = props
-// const [ memberIsActive, setMemberIsActive ] = useState(isActive)
+const { setNames, names, person, deleteName, id, setIsActive, toggleActivator, innerRef, ...extraProps} = props
 
-const handleClickTurn = (e) => {
-  e.preventDefault()
-  setIsActive(true)
-  console.log('first')
-  // setNames(names.filter(person => person.id === id).isActive)
-  
+const handleClick = (e, id) => {
+  e.stopPropagation()
+  deleteName(id)
 }
 
-// const makePersonActive = id => {
-//   isActiv = True
-// }
-
-// const deleteName = id => {
-//   setNames(names.filter(person => person.id !== id))
-// }
 
   return (
-
+    <div>
     <li className='name-list__card'
-    onClick={handleClickTurn}
+    onClick={() => toggleActivator(id)}
     {...extraProps} ref={innerRef}
       >
       {person}
       <MdDelete
-        style={{color: 'red', cursor: 'pointer'}}
-        onClick={() => deleteName(id)}
+        className='name-list__card--button'
+        style={{color: 'red', cursor: 'pointer', margin: '0.5rem'}}
+        onClick={(e) => handleClick(e, id)}
       />
     </li>
+    </div>
   )
 }
 
