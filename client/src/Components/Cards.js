@@ -30,6 +30,7 @@ const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
                         {...provided.dragHandleProps}
                   id={person.id}
                   person={person.name}
+                  isActive={person.isActive}
                   toggleActivator={toggleActivator}
                   deleteName={deleteName}
                   setNames={setNames}
