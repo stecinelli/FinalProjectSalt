@@ -13,12 +13,15 @@ function App() {
   return (
     <div className="App">
       <h3 className='hello'>Hello Kitties!</h3>
-      <Sound />
-      <Timer />
+      <div className='timer-and-sound'>
+        <Timer />
+        <Sound />
+      </div>
       <div className='names-and-wish-container'>
         <Names />
         <FunnyWish />
       </div>
+
     </div>
   );
 }
