@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 
 * {
   /* border: 1px solid grey; */
@@ -42,8 +43,34 @@ ul, li {
 .Sound-selector {
   font-size: 20px;
 }
-.timer {
-  /* background-color: rgb(187, 187, 255); */
+.Sound-lable{
+  margin-right: 0.5rem;
+}
+.Timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #959DA5; */
+  margin-top: 1rem;
+}
+.clock-view {
+  font-size: 50px;
+  color: rgb(128, 0, 47);
+  font-weight: 700;
+  /* background-color: rgb(190, 255, 255); */
+}
+.top-of-clock, .bottom-of-clock {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+  /* background-color: rgb(255, 180, 88); */
+}
+.change-time-button {
+  font-size: 30px;
+  color: rgb(78, 0, 28);
+  cursor: pointer;
 }
 .names-and-wish-container {
   /* background-color: rgb(250, 215, 215); */
@@ -97,6 +124,9 @@ ul, li {
   margin: 2px 0;
 
 }
+.card--active{
+  background-color: rgb(255, 234, 255);
+}
 .name-list__card--button {
   color: 'red';
    cursor: 'pointer';
@@ -139,7 +169,7 @@ ul, li {
   color: #24292E;
   cursor: pointer;
   display: inline-block;
-  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: 'Secular One', sans-serif;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -192,7 +222,7 @@ ul, li {
   padding: 0;
 }
 
-.Timer > button > img {
+.two-buttons > button > img {
   width: 40px;
   margin: 0;
   padding: 0;
@@ -205,7 +235,19 @@ ul, li {
   margin-left: 0.3rem;
 }
 
-.Timer > button {
+.two-buttons > button {
+  border: none;
+  background-color: white;
+  color: none;
+}
+
+.funnyWish-button > img {
+  width: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.funnyWish-button {
   border: none;
   background-color: white;
   color: none;
