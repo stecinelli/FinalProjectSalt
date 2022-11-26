@@ -4,6 +4,7 @@ import playButton from './Buttons/play-button-pink.png'
 const Sound = () => {
   const [soundList, setSoundList] = useState([])
   const [soundToPlay, setSoundToPlay] = useState([])
+  const [soundUploaded, setSoundUploaded] = useState(null)
 
   useEffect(() => {
     fetch('/sounds/archive.json')
@@ -12,7 +13,7 @@ const Sound = () => {
   }, [])
 
   useEffect(() => {
-    if(soundList.length > 0) setSoundToPlay([soundList[0]])
+    if (soundList.length > 0) setSoundToPlay([soundList[0]])
   }, [soundList])
 
   const getSoundFunction = e => {
@@ -22,7 +23,11 @@ const Sound = () => {
 
   const playSound = () => {
     document.getElementById('player').play()
-  };
+  }
+
+  const getSoundUploaded = e => {
+    setSoundUploaded(e.target.files[0])
+  }
 
   return (
     <div className='Sound'>
@@ -40,10 +45,20 @@ const Sound = () => {
       </select>
       {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
         <>
-        <audio id='player' src={soundToPlay[0].url}></audio>
-        <button className='Sound-player--button' onClick={playSound}>
-          <img src={playButton} alt='play'/>
-        </button>
+          <audio id='player' src={soundToPlay[0].url}></audio>
+          <button className='Sound-player--button' onClick={playSound}>
+            <img src={playButton} alt='play' />
+          </button>
+
+          <label className='Sound-input--label' htmlFor='SoundInput'>Upload your sound:</label>
+          <input
+            className='Sound-input'
+            type='file'
+            name='SoundInput'
+            accept='audio/*'
+            environment
+            onChange={getSoundUploaded}
+          />
         </>
       }
     </div>
