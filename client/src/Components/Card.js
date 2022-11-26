@@ -10,8 +10,6 @@ const handleClick = (e, id) => {
 }
 
   return (
-
-    <div>
     <li className={`name-list__card ${isActive === true ? 'card--active' : ''}`}
     onClick={() => toggleActivator(id)}
     {...extraProps} ref={innerRef}

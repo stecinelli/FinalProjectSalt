@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import refreshButton from './Buttons/refresh-button-pink.png'
 
 function FunnyWish() {
 
@@ -38,7 +39,9 @@ function FunnyWish() {
         <div className='funnyWish'>
             <div className='wish-and-button'>
                 <p className='luck'>Good luck, {name}!</p>
-                <button onClick={handleFetch}>New!</button>
+                <button className='funnyWish-button' onClick={handleFetch}>
+                    <img src={refreshButton} alt='refresh'/>
+                </button>
             </div>
             {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" className='image'/>}
         </div>
