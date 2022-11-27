@@ -4,10 +4,9 @@ import playButton from './Buttons/play-button-pink.png'
 const Sound = () => {
   const [soundList, setSoundList] = useState([])
   const [soundToPlay, setSoundToPlay] = useState([])
-  const [soundUploaded, setSoundUploaded] = useState(null)
 
   useEffect(() => {
-    fetch('/sounds/archive.json')
+    fetch('/sounds')
       .then(result => result.json())
       .then(result => setSoundList(result))
   }, [])
@@ -25,8 +24,14 @@ const Sound = () => {
     document.getElementById('player').play()
   }
 
-  const getSoundUploaded = e => {
-    setSoundUploaded(e.target.files[0])
+  const handleSoundUploadChange = async e => {
+    e.preventDefault()
+    let formData = new FormData()
+    formData.append('sound', e.target.files[0])
+    const response = await fetch('/sounds', {
+      method: 'POST',
+      body: formData,
+    })
   }
 
   return (
@@ -57,7 +62,7 @@ const Sound = () => {
             name='SoundInput'
             accept='audio/*'
             environment
-            onChange={getSoundUploaded}
+            onChange={handleSoundUploadChange}
           />
         </>
       }
