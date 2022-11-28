@@ -4,15 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "local": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "mongodb": "^4.12.1",
     "node-fetch": "^3.3.0",
-    "unirest": "^0.6.0"
+    "unirest": "^0.6.0",
+    "uuidv4": "^6.2.13"
   },
-  "proxy": "http://localhost:8080/"
+  "proxy": "http://localhost:8080/",
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7"
+  }
 }

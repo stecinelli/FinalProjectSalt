@@ -2,24 +2,26 @@ import React from 'react'
 import Input from './InputContainer'
 import Cards from './Cards'
 import { v4 as uuidv4 } from 'uuid'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import MainContext from '../Context'
+
 
 const LOCAL_STORAGE_KEY = 'final_project';
 
 const Names = () => {
-  const [names, setNames] = useState([])
+  const { names, setNames } = useContext(MainContext)
   // const [isActive, setIsActive] = useState(false)
 
-  useEffect(() => {
-    const nameStorage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-    if (nameStorage) {
-      setNames(nameStorage)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const nameStorage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  //   if (nameStorage) {
+  //     setNames(nameStorage)
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(names))
-  }, [names])
+  // useEffect(() => {
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(names))
+  // }, [names])
 
   const addName = name => {
     const id = uuidv4()
@@ -40,7 +42,7 @@ const Names = () => {
 
   return (
     <div className='input-and-cards'>
-      <Input 
+      <Input
         names={names}
         addName={addName}/>
       <Cards
