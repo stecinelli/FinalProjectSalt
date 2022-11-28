@@ -49,16 +49,18 @@ function App() {
 
   return (
     <MainContext.Provider value={context}>
-      <div className="App">
-        <h3 className='hello'>{mobName}</h3>
-        <Sound />
+    <div className="App">
+      <h3 className='hello'>{mobName}</h3>
+      <div className='timer-and-sound'>
         <Timer />
-        <div className='names-and-wish-container'>
-          <Names />
-          <FunnyWish />
-        </div>
-        <Share />
+        <Sound />
       </div>
+      <div className='names-and-wish-container'>
+        <Names />
+        <FunnyWish />
+      </div>
+      <Share />
+    </div>
     </MainContext.Provider>
   );
 }
