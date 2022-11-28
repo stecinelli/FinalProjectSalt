@@ -3,7 +3,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs')
 const unirest = require('unirest');
-const { getMobByName, insertMob } = require('./persistence');
+const { getMobByName, insertMob, updateMobNames } = require('./persistence');
 
 const app = express();
 const port = 8080;
@@ -84,6 +84,28 @@ app.post('/mobs', async (req, res) => {
   await insertMob(mob);
 
   res.status(201).send();
+});
+
+app.patch('/mobs', async (req, res) => {
+  const mob = req.body;
+
+  const existingMob = await getMobByName(mob.mob);
+
+  if (!existingMob) {
+    res
+      .status(404)
+      .json({
+        message: "Mob do not exist"
+      });
+  }
+
+  if(mob.names) {
+    const response = await updateMobNames(mob.mob, mob.names)
+    res.status(200).send()
+  }
+
+  res.status(400).send()
+
 });
 
 // TODO: put route to update mobs (names, times, etc), validate if mob exist before trying to update

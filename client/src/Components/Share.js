@@ -1,28 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import MainContext from '../Context'
 
 const Share = () => {
   const { mobName, setMobName } = useContext(MainContext)
+  const { names } = useContext(MainContext)
+  const { soundList } = useContext(MainContext)
+  const { playing } = useContext(MainContext)
+  const { initialCounter } = useContext(MainContext)
+  const { counter } = useContext(MainContext)
+
 
   const createMob = async () => {
     const newMob = {
       "mob": mobName,
-      "sounds": [],
-      "timeInitial": 15,
-      "timeLeft": 15,
-      "playing": true,
-      "names": [
-        {
-          "id": "1",
-          "name": "Stephaninha"
-        },
-        {
-          "id": "1",
-          "name": "Ste2"
-        }
-      ]
-    } // TODO: get all data from context
-
+      "sounds": soundList,
+      "timeInitial": initialCounter,
+      "timeLeft": counter,
+      "playing": playing,
+      "names": names,
+    }
     await fetch('/mobs', {
       method: 'POST',
       headers: {
@@ -33,6 +29,25 @@ const Share = () => {
 
     window.location.href = `/?mob=${mobName}`
   }
+
+  useEffect(() => {
+    const updateMob = async () => {
+      const changedMob = {
+        "mob": mobName,
+        "names": names,
+      }
+      await fetch('/mobs', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(changedMob)
+      })
+    }
+
+    updateMob()
+    console.log('Patch')
+  }, [names])
 
   return (
     <div className='Share'>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import refreshButton from './Buttons/refresh-button-pink.png'
+import { useEffect, useState, useContext } from 'react';
+import refreshButton from './Buttons/refresh-button-pink.png';
+import MainContext from '../Context'
 
 function FunnyWish() {
 
@@ -8,10 +9,27 @@ function FunnyWish() {
     const getFromLocalStorage = (key = 'cat') => JSON.parse(window.localStorage.getItem(key));
     let savedCat = getFromLocalStorage() || []
 
+    const { names } = useContext(MainContext)
     const [catData, setCatData] = React.useState(savedCat);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [name, setName] = useState("Paula");
+    const [name, setName] = useState('friend');
+    const { isChanging, setIsChanging } = useContext(MainContext)
+
+console.log(names, 'maria-names')
+
+
+// useEffect(() => {
+//         if (names.length !== 0) {
+            // console.log(names, 'maria-names')
+            // console.log(names.map(person => person.isActive), 'maria')
+    //     }
+    // }, [])
+
+
+    const changeActiveName = () => {
+        setName(names.find(person => person.isActive).name)
+    }
 
     const handleFetch = () => {
         setIsLoading(true);
@@ -27,23 +45,29 @@ function FunnyWish() {
                 setIsLoading(false);
             });
         // setCatData(mockData)
+
     };
 
-    useEffect(() => {
-        if (savedCat.length === 0) {
-            handleFetch()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (savedCat.length === 0) {
+    //         handleFetch()
+    //     }
+    //     if (isChanging) {
+    //         handleFetch()
+    //         changeActiveName()
+    //     }
+    // }, [isChanging])
 
     return (
         <div className='funnyWish'>
+            <button onClick={changeActiveName}>Click </button>
             <div className='wish-and-button'>
                 <p className='luck'>Good luck, {name}!</p>
                 <button className='funnyWish-button' onClick={handleFetch}>
-                    <img src={refreshButton} alt='refresh'/>
+                    <img src={refreshButton} alt='refresh' />
                 </button>
             </div>
-            {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" className='image'/>}
+            {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" className='image' />}
         </div>
     )
 }

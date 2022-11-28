@@ -2,11 +2,11 @@
  const MongoClient = require('mongodb').MongoClient;
 
 var uri = "mongodb://root:rootpassword@localhost:27017?authMechanism=DEFAULT";
+const client = new MongoClient(uri);
+client.connect();
+const db = client.db('mobtimer');
 
 async function getCollection(collection) {
-  const client = new MongoClient(uri);
-  await client.connect();
-  const db = client.db('mobtimer');
   return db.collection(collection);
 }
 
@@ -21,9 +21,18 @@ async function insertMob(mob) {
   await collection.insertOne(mob);
 }
 
+async function updateMobNames(name, change) {
+  const collection = await getCollection('mobs');
+  return collection.findOneAndUpdate(
+    { mob: name },
+    {$set: { names: change}}
+  );
+}
+
 module.exports = {
   getMobByName,
   insertMob,
+  updateMobNames,
 }
 
 // use 'docker-compose up -d' to start the database

@@ -10,14 +10,13 @@ import MainContext from '../Context'
 const Timer = () => {
     //setting initial counter time and transition time
     const { initialCounter } = useContext(MainContext)
-    console.log('initialCounter', initialCounter)
     const transitionTime = 5
     //ref ensures there's only one interval set - you need to assign the interval id to ref to keep track of it
     const Ref = useRef(null)
     //defining states
-    const [playing, setPlaying] = useState(false)
+    const { playing, setPlaying } = useContext(MainContext)
     const { counter, setCounter } = useContext(MainContext)
-    const [isChanging, setIsChanging] = useState(false)
+    const { isChanging, setIsChanging } = useContext(MainContext)
 
     //  checking [counter] every time it changes. handling transition.
     useEffect(() => {
@@ -38,8 +37,6 @@ const Timer = () => {
     const formatTimer = (count) => {
         const mins = Math.floor(count / 60)
         const seconds = count % 60;
-
-
         return (mins > 9 ? mins : '0' + mins) + ':'
             + (seconds > 9 ? seconds : '0' + seconds);
     }

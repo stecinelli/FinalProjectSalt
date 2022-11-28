@@ -11,7 +11,7 @@ const Input = ({ addName }) => {
   }
 
   return (
-    <form 
+    <form
       className='input'
       onSubmit={ onSubmit }>
       <input

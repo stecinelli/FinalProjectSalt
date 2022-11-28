@@ -5,12 +5,13 @@ import playButton from './Buttons/play-button-pink.png'
 const Sound = () => {
   const { soundList, setSoundList } = useContext(MainContext)
   const [soundToPlay, setSoundToPlay] = useState([])
+  const [soundIsRefreshed, setSoundIsRefreshed] = useState(true)
 
   useEffect(() => {
     fetch('/sounds')
       .then(result => result.json())
       .then(result => setSoundList(result))
-  }, [])
+  }, [setSoundList, soundIsRefreshed])
 
   useEffect(() => {
     if (soundList.length > 0) setSoundToPlay([soundList[0]])
@@ -25,18 +26,27 @@ const Sound = () => {
     document.getElementById('player').play()
   }
 
-  const handleSoundUploadChange = async e => {
+  const [soundFile, setSoundFile] = useState('')
+
+  const saveChanges = e => {
     e.preventDefault()
+    setSoundFile(e.target.files[0])
+  }
+
+  const handleSoundUploadChange = async () => {
+    setSoundIsRefreshed(false)
     let formData = new FormData()
-    formData.append('sound', e.target.files[0])
+    formData.append('sound', soundFile)
     const response = await fetch('/sounds', {
       method: 'POST',
       body: formData,
     })
+      .then
+    setSoundIsRefreshed(true)
   }
 
   return (
-    <div className='Sound'>
+    soundIsRefreshed && <div className='Sound'>
       <label className='Sound-lable' htmlFor='SoundSelector'>🎶 </label>
       <select name='SoundSelector'
         onChange={getSoundFunction}
@@ -63,8 +73,9 @@ const Sound = () => {
             name='SoundInput'
             accept='audio/*'
             environment
-            onChange={handleSoundUploadChange}
+            onChange={saveChanges}
           />
+          <button onClick={handleSoundUploadChange}>Submit</button>
         </>
       }
     </div>
