@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import MainContext from '../Context'
 import playButton from './Buttons/play-button-pink.png'
 
 const Sound = () => {
-  const [soundList, setSoundList] = useState([])
+  const { soundList, setSoundList } = useContext(MainContext)
   const [soundToPlay, setSoundToPlay] = useState([])
 
   useEffect(() => {

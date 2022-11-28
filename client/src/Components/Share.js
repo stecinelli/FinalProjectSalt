@@ -1,31 +1,37 @@
-import React, {useState} from 'react'
+import React, { useContext } from 'react'
+import MainContext from '../Context'
 
 const Share = () => {
-  const [mobName, setMobName] = useState('')
-  const [mob, setMob] = useState([
-    {
-      mob: '',
-      sounds: [],
-      timer: 10,
-      members: [],
-    },
-  ])
+  const { mobName, setMobName } = useContext(MainContext)
 
-  const createMob = () => {
+  const createMob = async () => {
     const newMob = {
-      mob: mobName,
-      sounds: [],
-      timer: 10,
-      members: [],
-    }
+      "mob": mobName,
+      "sounds": [],
+      "timeInitial": 15,
+      "timeLeft": 15,
+      "playing": true,
+      "names": [
+        {
+          "id": "1",
+          "name": "Stephaninha"
+        },
+        {
+          "id": "1",
+          "name": "Ste2"
+        }
+      ]
+    } // TODO: get all data from context
 
-    setMob([...mob, newMob])
+    await fetch('/mobs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newMob)
+    }) // TODO: treat exception if server responds error
 
-    window.location.href = mobName;
-  }
-
-  const getMobName = e => {
-    setMobName(e.target.value)
+    window.location.href = `/?mob=${mobName}`
   }
 
   return (
@@ -42,16 +48,17 @@ const Share = () => {
             createMob();
           }
         }}
-      onChange={getMobName}
+        onChange={e => setMobName(e.target.value)}
       />
       <button
         className='Share-input--button'
         type='button'
         id='createMobButton'
         onClick={createMob}
-        >
+      >
         Save
       </button>
+      {/* TODO: do not allow user to save if their session is already from the db */}
     </div>
   )
 }

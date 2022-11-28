@@ -3,12 +3,14 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs')
 const unirest = require('unirest');
+const { getMobByName, insertMob } = require('./persistence');
 
 const app = express();
 const port = 8080;
 
 
 app.use(fileUpload());
+app.use(express.json());
 app.use('/sounds', express.static('./files'));
 
 app.get('/cat/', (req, res) => {
@@ -20,16 +22,13 @@ app.get('/cat/', (req, res) => {
 });
 
 app.get('/sounds', (req, res) => {
-  // listar conteudo da pasta
   const files = fs.readdirSync(path.join(__dirname, 'files'));
-  // transformar nome do arquivo em title e url
   const result = files.map(file => {
     return {
       title: file.split('.')[0].charAt(0).toUpperCase() + file.split('.')[0].slice(1),
       url: `http://localhost:8080/sounds/${file}`,
     };
   });
-  // responder json com lista de obj
   res.json(result);
 });
 
@@ -46,9 +45,48 @@ app.post('/sounds', (req, res) => {
   });
 });
 
-app.get('/mob', (req, res) => {
+app.get('/mobs/:name', async (req, res) => {
+  const mobName = req.params.name;
 
-})
+  if (!mobName) {
+    res
+      .status(400)
+      .send();
+    return;
+  }
+
+  const mob = await getMobByName(mobName);
+
+  if (!mob) {
+    res
+      .status(404)
+      .send();
+    return;
+  }
+
+  res.json(mob);
+});
+
+app.post('/mobs', async (req, res) => {
+  // TODO: validate body content (schema validation)
+  const mob = req.body;
+
+  const existingMob = await getMobByName(mob.mob);
+
+  if (existingMob) {
+    res
+      .status(409)
+      .json({
+        message: "Cannot insert duplicated mob name "
+      });
+  }
+
+  await insertMob(mob);
+
+  res.status(201).send();
+});
+
+// TODO: put route to update mobs (names, times, etc), validate if mob exist before trying to update
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)

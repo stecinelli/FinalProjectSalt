@@ -1,20 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import playButton from './Buttons/play-button-black.png'
 import stopButton from './Buttons/stop-button-black.png'
 import pauseButton from './Buttons/pause-button-black.png'
-import { BiCaretDown, BiCaretUp } from "react-icons/bi";
+import { BiCaretDown, BiCaretUp } from "react-icons/bi"
 
+import MainContext from '../Context'
 
 
 const Timer = () => {
     //setting initial counter time and transition time
-    const initialCounter = 10
+    const { initialCounter } = useContext(MainContext)
+    console.log('initialCounter', initialCounter)
     const transitionTime = 5
     //ref ensures there's only one interval set - you need to assign the interval id to ref to keep track of it
-    const Ref = useRef(null);
+    const Ref = useRef(null)
     //defining states
     const [playing, setPlaying] = useState(false)
-    const [counter, setCounter] = useState(initialCounter);
+    const { counter, setCounter } = useContext(MainContext)
     const [isChanging, setIsChanging] = useState(false)
 
     //  checking [counter] every time it changes. handling transition.
@@ -54,7 +56,7 @@ const Timer = () => {
         setPlaying(true)
     }
     const pauseTimer = () => {
-        // this is how we clear the interval - stop the ticking. 
+        // this is how we clear the interval - stop the ticking.
         if (Ref.current) clearInterval(Ref.current)
         setPlaying(false)
     }
