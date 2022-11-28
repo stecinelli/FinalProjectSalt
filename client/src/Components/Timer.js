@@ -34,12 +34,12 @@ const Timer = () => {
                 if(!autonext) {
                     pauseTimer()
                 }
-                document.getElementById('player').pause()
+                // document.getElementById('player').pause()
             }
             else {
                 setCounter(transitionTime)
                 setIsChanging(true)
-                document.getElementById('player').play()
+                // document.getElementById('player').play()
             }
         }
 
