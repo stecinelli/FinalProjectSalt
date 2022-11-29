@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "local": "nodemon index.js"
+    "local": "export PORT=8080 && export isLocalDeploy=true && nodemon index.js"
   },
   "keywords": [],
   "author": "",
