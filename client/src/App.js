@@ -30,7 +30,7 @@ function App() {
     const queryMobName = getQueryParameter('mob')
 
     const fetchInitData = async () => {
-      const apiResult = await (fetch(`/mobs/${queryMobName}`).then(data => data.json()))
+      const apiResult = await (fetch(`/api/mobs/${queryMobName}`).then(data => data.json()))
 
       setMobName(apiResult.mob)
       setInitialCounter(apiResult.timeInitial)

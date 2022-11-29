@@ -30,13 +30,13 @@ function FunnyWish() {
     const changeActiveName = () => {
        if ( names.length>0 && names.find(person => person.isActive)) {
        return names.find(person => person.isActive).name
-       }  
+       }
        else return "friend"
     }
 
     const handleFetch = () => {
         setIsLoading(true);
-        fetch('/cat/')
+        fetch('/api/cat/')
             .then(result => result.json())
             .then(result => {
                 setCatData(result)
@@ -70,7 +70,7 @@ function FunnyWish() {
                     <img src={refreshButton} alt='refresh' />
                 </button>
             </div>
-            {<img src={'https://cataas.com/' + catData.url} alt="cat" width="300" className='image' />}
+            {<img src={'https://cataas.com/cat'} alt="cat" width="300" className='image' />}
         </div>
     )
 }
