@@ -11,11 +11,17 @@ import MainContext from './Context';
 function App() {
   const [mobName, setMobName] = useState('Hello Kitties!')
   const [soundList, setSoundList] = useState([])
-  const [initialCounter, setInitialCounter] = useState(10)
+  const [initialCounter, setInitialCounter] = useState(6)
   const [counter, setCounter] = useState(initialCounter)
   const [playing, setPlaying] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
   const [names, setNames] = useState([])
+
+  const [selectedTime, setSelectedTime] = useState(initialCounter)
+  const [minutes, setMinutes] = useState('')
+  const [seconds, setSeconds] = useState('')
+  const [autonext, setAutonext] = useState(true)
+  const [timeModified, setTimeModified] = useState(false)
 
 
 
@@ -33,7 +39,7 @@ function App() {
       // TODO: memorize getters and setters to persist on localstorage
     }
 
-    if(queryMobName !== null) fetchInitData()
+    if (queryMobName !== null) fetchInitData()
   }, [])
 
   // TODO: think abouth localStorage (if mobName do not exist get/save from/on localStorage)
@@ -46,7 +52,12 @@ function App() {
     names, setNames,
     counter, setCounter,
     playing, setPlaying,
-    isChanging, setIsChanging
+    isChanging, setIsChanging,
+    selectedTime, setSelectedTime,
+    minutes, setMinutes,
+    seconds, setSeconds,
+    autonext, setAutonext,
+    timeModified, setTimeModified,
   }
 
   return (
