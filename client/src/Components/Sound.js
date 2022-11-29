@@ -47,25 +47,29 @@ const Sound = () => {
 
   return (
     soundIsRefreshed && <div className='Sound'>
-      <label className='Sound-lable' htmlFor='SoundSelector'>🎶 </label>
-      <select name='SoundSelector'
-        onChange={getSoundFunction}
-        className='Sound-selector' >
-        {soundList && soundList.map((sound, index) =>
-          <option
-            key={sound.title + index}
-            value={sound.title} >
-            {sound.title}
-          </option>
-        )}
-      </select>
-      {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
+    
+        <label className='Sound-lable' htmlFor='SoundSelector'>🎶 </label>
+        <select name='SoundSelector'
+          onChange={getSoundFunction}
+          className='Sound-selector' >
+          {soundList && soundList.map((sound, index) =>
+            <option
+              key={sound.title + index}
+              value={sound.title} >
+              {sound.title}
+            </option>
+          )}
+        </select>
+
+
+        {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
         <>
           <audio id='player' src={soundToPlay[0].url}></audio>
           <button className='Sound-player--button' onClick={playSound}>
             <img src={playButton} alt='play' />
           </button>
 
+          
           <label className='Sound-input--label' htmlFor='SoundInput'>Upload your sound:</label>
           <input
             className='Sound-input'
@@ -75,9 +79,10 @@ const Sound = () => {
             environment
             onChange={saveChanges}
           />
-          <button onClick={handleSoundUploadChange}>Submit</button>
+          <button className='submit' onClick={handleSoundUploadChange}>Submit</button>
         </>
       }
+        
     </div>
   )
 }
