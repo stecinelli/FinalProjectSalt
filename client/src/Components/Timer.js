@@ -83,20 +83,38 @@ const Timer = (props) => {
         setTimeModified(true)
         // setCounter(60 * minutes + seconds)
     }
-    //enforcing the rules of input - whenever we click away from input box it will format it, reducing numbers over 59 to 59. enforcing rules of time
-    const adjustTime = () => {
-        if (seconds > 59) {
-            setSeconds(59)
-        }
-        if (minutes > 59) {
-            setMinutes(59)
-        }
-        if (minutes <= 9) setMinutes('0' + Number(minutes))
-        if (seconds <= 9) setSeconds('0' + Number(seconds))
+    //
+    //this is formatting the timer by calculating mins and secs from counter
+    let mins = Math.floor(counter / 60)
+    let secs = counter % 60
+    if (mins <= 9) { mins = '0' + Number(mins) }
+    if (secs <= 9) { secs = '0' + Number(secs) }
+    setMinutes(mins)
+    setSeconds(secs)
+    console.log('minutes=', minutes, 'seconds=', seconds, 'counter=', counter, 'playing=', playing)
+  }, [counter]);
+
+
+
+  //getting whatever they typed and setting it as new time, setTimeModified- when we hit play we want to know if we interacted with the time so we set a new time
+  const editTimerMinutes = (newMinutes) => {
+    setMinutes(newMinutes)
+    setTimeModified(true)
+    // setCounter(60 * minutes + seconds)
+  }
+  const editTimerSeconds = (newSeconds) => {
+    setSeconds(newSeconds)
+    setTimeModified(true)
+
+    // setCounter(60 * minutes + seconds)
+  }
+  //enforcing the rules of input - whenever we click away from input box it will format it, reducing numbers over 59 to 59. enforcing rules of time
+  const adjustTime = () => {
+    if (seconds > 59) {
+      setSeconds(59)
     }
-    //toggle between true and false to see if we autostart or not when we hit zero
-    const toggleAuto = () => {
-        setAutonext(current => !current)
+    if (minutes > 59) {
+      setMinutes(59)
     }
 
     // just making the timer
@@ -134,6 +152,14 @@ const Timer = (props) => {
         Ref.current = id;
         setPlaying(true)
     }
+    
+    useEffect(() => {
+    if (playing) {
+      startTimer()
+      console.log('useEffect')
+    }
+  }, [playing])
+  
     const pauseTimer = () => {
         // this is how we clear the interval - stop the ticking. 
         if (Ref.current) clearInterval(Ref.current)
@@ -175,21 +201,21 @@ const Timer = (props) => {
             setTimeModified(true)
         }
     }
-    const decreaseCounterSeconds = () => {
-        if (!playing) {
-            if (counter >= 1) {
-                setCounter(count => count - 1)
-            }
-            setSelectedTime(counter)
-            setTimeModified(true)
-        }
+  }
+  const decreaseCounterSeconds = () => {
+    if (!playing) {
+      if (counter >= 1) {
+        setCounter(count => count - 1)
+      }
+      setSelectedTime(counter)
+      setTimeModified(true)
     }
-    const increaseCounterSeconds = () => {
-        if (!playing) {
-            setCounter(count => count + 1)
-            setSelectedTime(counter)
-            setTimeModified(true)
-        }
+  }
+  const increaseCounterSeconds = () => {
+    if (!playing) {
+      setCounter(count => count + 1)
+      setSelectedTime(counter)
+      setTimeModified(true)
     }
     return (
         <div className="timer-box">
@@ -214,6 +240,7 @@ const Timer = (props) => {
 
         </div>
     )
+
 }
 
 export default Timer

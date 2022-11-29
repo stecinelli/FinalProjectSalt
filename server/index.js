@@ -3,7 +3,7 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const fs = require('fs')
 const unirest = require('unirest');
-const { getMobByName, insertMob, updateMobNames } = require('./persistence');
+const { getMobByName, insertMob, updateMobNames, updateMobTime, updateMobSound } = require('./persistence');
 
 const app = express();
 const port = 8080;
@@ -87,6 +87,8 @@ app.post('/mobs', async (req, res) => {
 });
 
 app.patch('/mobs', async (req, res) => {
+  // TODO: validate body content (schema validation)
+
   const mob = req.body;
 
   const existingMob = await getMobByName(mob.mob);
@@ -104,11 +106,19 @@ app.patch('/mobs', async (req, res) => {
     res.status(200).send()
   }
 
+  if(mob.timeInitial) {
+    const response = await updateMobTime(mob.mob, mob)
+    res.status(200).send()
+  }
+
+  if(mob.sounds) {
+    const response = await updateMobSound(mob.mob, mob.sounds)
+    res.status(200).send()
+  }
+
   res.status(400).send()
 
 });
-
-// TODO: put route to update mobs (names, times, etc), validate if mob exist before trying to update
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)

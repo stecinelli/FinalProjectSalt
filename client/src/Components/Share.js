@@ -8,8 +8,9 @@ const Share = () => {
   const { playing } = useContext(MainContext)
   const { initialCounter } = useContext(MainContext)
   const { counter } = useContext(MainContext)
-  const [url, setUrl] = useState(window.location.href);
   const { autonext } = useContext(MainContext)
+
+  const [url, setUrl] = useState(window.location.href);
 
   const createMob = async () => {
     const newMob = {
@@ -33,7 +34,7 @@ const Share = () => {
   }
 
   useEffect(() => {
-    const updateMob = async () => {
+    const updateMobName = async () => {
       const changedMob = {
         "mob": mobName,
         "names": names,
@@ -47,9 +48,29 @@ const Share = () => {
       })
     }
 
-    updateMob()
-    console.log('Patch')
+    updateMobName()
   }, [names])
+
+  useEffect(() => {
+    const updateMobTime = async () => {
+      const changedMob = {
+        "mob": mobName,
+        "timeInitial": initialCounter,
+        "timeLeft": counter,
+        "playing": playing,
+        "autonext": autonext,
+      }
+      await fetch('/mobs', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(changedMob)
+      })
+    }
+    
+    updateMobTime()
+  }, [initialCounter, counter, playing, autonext])
 
    //function to copy url
    const getCurrentUrl = (e) => {

@@ -69,9 +69,6 @@ const Names = () => {
     } else {
       updatedNames = names.filter(person => person.id !== id);
     }
-    setNames(updatedNames)
-    
-  }
 
 
   // toggle activator

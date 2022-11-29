@@ -8,6 +8,7 @@ import Share from './Components/Share';
 import Footer from './Components/Footer';
 import { getQueryParameter } from './Helpers/url';
 import MainContext from './Context';
+import Footer from './Components/Footer';
 
 function App() {
   const [mobName, setMobName] = useState('Hello Kitties!')
@@ -37,6 +38,7 @@ function App() {
       setCounter(apiResult.timeLeft)
       setNames(apiResult.names)
       setPlaying(apiResult.playing)
+      setAutonext(apiResult.autonext)
       // TODO: memorize getters and setters to persist on localstorage
     }
 
