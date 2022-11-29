@@ -9,7 +9,7 @@ const Share = () => {
   const { initialCounter } = useContext(MainContext)
   const { counter } = useContext(MainContext)
   const [url, setUrl] = useState(window.location.href);
-
+  const { autonext } = useContext(MainContext)
 
   const createMob = async () => {
     const newMob = {
@@ -19,6 +19,7 @@ const Share = () => {
       "timeLeft": counter,
       "playing": playing,
       "names": names,
+      "autonext": autonext,
     }
     await fetch('/mobs', {
       method: 'POST',

@@ -3,7 +3,6 @@ import Card from './Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
-  
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -14,7 +13,6 @@ const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
     setNames(items);
   }
 
- 
 
   return (
     <>
@@ -47,7 +45,6 @@ const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
         )}
       </Droppable>
     </DragDropContext>
-    
     </>
   )
 }
