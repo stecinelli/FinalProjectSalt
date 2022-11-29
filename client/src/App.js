@@ -8,7 +8,6 @@ import Share from './Components/Share';
 import Footer from './Components/Footer';
 import { getQueryParameter } from './Helpers/url';
 import MainContext from './Context';
-import Footer from './Components/Footer';
 
 function App() {
   const [mobName, setMobName] = useState('Hello Kitties!')
