@@ -71,11 +71,11 @@ const Names = () => {
     }
 
   }
-  useEffect(() => {
-    if (isChanging) {
-      makeNextPersonIsActive()
-    }
-  }, [isChanging])
+  // useEffect(() => {
+  //   if (isChanging) {
+  //     makeNextPersonIsActive()
+  //   }
+  // }, [isChanging])
   return (
     <div className='input-and-cards'>
       <button onClick={makeNextPersonIsActive}> Click </button>

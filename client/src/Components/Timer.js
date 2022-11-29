@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import playButton from './Buttons/play-button-black.png'
 import stopButton from './Buttons/stop-button-black.png'
 import pauseButton from './Buttons/pause-button-black.png'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import "./Timer.css"
+import MainContext from '../Context'
 
 
 const Timer = (props) => {
@@ -13,16 +14,19 @@ const Timer = (props) => {
     //ref ensures there's only one interval set - you need to assign the interval id to ref to keep track of it
     const Ref = useRef(null);
     //defining states
-    const [playing, setPlaying] = useState(false)
-    const [counter, setCounter] = useState(initialCounter);
-    const [isChanging, setIsChanging] = useState(false)
+
+    const { playing, setPlaying } = useContext(MainContext)
+    const { counter, setCounter } = useContext(MainContext)
+    const { isChanging, setIsChanging } = useContext(MainContext)
+
     //time we edited
-    const [selectedTime, setSelectedTime] = useState(initialCounter)
-    const [minutes, setMinutes] = useState('')
-    const [seconds, setSeconds] = useState('')
-    const [autonext, setAutonext] = useState(true)
-    const [timeModified, setTimeModified] = useState(false)
+    const {selectedTime, setSelectedTime} = useContext(MainContext)
+    const {minutes, setMinutes} = useContext(MainContext)
+    const {seconds, setSeconds} = useContext(MainContext)
+    const {autonext, setAutonext} = useContext(MainContext)
+    const {timeModified, setTimeModified} = useContext(MainContext)
     // calculating the percentage of the circle
+
     const circleStyle = {
         //if time is being modified we set it to zero. otherwise we workout what percentage of time we have gone through
         '--percent': timeModified ? 0 : (selectedTime - counter) / selectedTime * 100,
@@ -39,12 +43,12 @@ const Timer = (props) => {
                     pauseTimer()
                 }
 
-                // document.getElementById('player').pause()
+                document.getElementById('player').pause()
             }
             else {
                 setCounter(transitionTime)
                 setIsChanging(true)
-
+                document.getElementById('player').play()
                 // We have finished timer, time to change person and beep etc
                 // props.timeUp()
             }
@@ -80,8 +84,6 @@ const Timer = (props) => {
         }
         if (minutes <= 9) setMinutes('0' + Number(minutes))
         if (seconds <= 9) setSeconds('0' + Number(seconds))
-
-
     }
     //toggle between true and false to see if we autostart or not when we hit zero
     const toggleAuto = () => {
@@ -177,7 +179,6 @@ const Timer = (props) => {
     }
     const decreaseCounterSeconds = () => {
         if (!playing) {
-
             if (counter >= 1) {
                 setCounter(count => count - 1)
             }
@@ -187,13 +188,11 @@ const Timer = (props) => {
     }
     const increaseCounterSeconds = () => {
         if (!playing) {
-
             setCounter(count => count + 1)
             setSelectedTime(counter)
             setTimeModified(true)
         }
     }
-
     return (
         <div className="box">
             <div className="card">
@@ -220,7 +219,6 @@ const Timer = (props) => {
 
                             {button}
                             <button onClick={toggleAuto}>Toggle auto: {autonext ? "ON" : "OFF"}</button>
-
                         </div>
                     </div>
                 </div>
