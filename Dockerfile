@@ -1,12 +1,12 @@
 FROM node:12
-
+# Create app directory
 WORKDIR /app
 
-COPY package*.json ./
+COPY server/package*.json .
 
 RUN npm install
 
-COPY . .
+COPY server .
 
 ENV PORT=8080
 
