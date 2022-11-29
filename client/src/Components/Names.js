@@ -45,9 +45,9 @@ const Names = () => {
       setNames(names.filter(person => person.id !== id))
     }
     setNames(names.filter(person => person.id !== id))
-    console.log('Darek is inside', names)
+
   }
-  console.log('Darek is outside', names)
+
 
 // useEffect(() => {
 //   toggleActivator(idToToggle)

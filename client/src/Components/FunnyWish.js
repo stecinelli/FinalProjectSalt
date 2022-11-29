@@ -16,7 +16,7 @@ function FunnyWish() {
     const [name, setName] = useState('friend');
     const { isChanging, setIsChanging } = useContext(MainContext)
 
-console.log(names, 'maria-names')
+// console.log(names, 'maria-names')
 
 
 // useEffect(() => {
