@@ -6,7 +6,7 @@ const unirest = require('unirest');
 const { getMobByName, insertMob, updateMobNames, updateMobTime, updateMobSound } = require('./persistence');
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT; // env var for railway.app
 
 
 app.use(fileUpload());
@@ -121,5 +121,5 @@ app.patch('/mobs', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`)
+  console.log(`Listening at http://0.0.0.0:${port}`) // host 0.0.0.0 for railway.app
 })

@@ -1,7 +1,8 @@
  const { uuid } = require('uuidv4');
  const MongoClient = require('mongodb').MongoClient;
-
-var uri = "mongodb://root:rootpassword@localhost:27017?authMechanism=DEFAULT";
+ 
+if (process.env.isLocalDeploy) var uri = "mongodb://root:rootpassword@localhost:27017?authMechanism=DEFAULT";
+else var uri = `mongodb://${process.env.MONGOUSER}:${process.env.MONGOPASSWORD}@containers-us-west-117.railway.app:5520`; // railway.app mongo
 const client = new MongoClient(uri);
 client.connect();
 const db = client.db('mobtimer');
