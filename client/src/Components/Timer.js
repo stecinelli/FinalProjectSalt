@@ -20,18 +20,13 @@ const Timer = (props) => {
     const { isChanging, setIsChanging } = useContext(MainContext)
 
     //time we edited
-    const {selectedTime, setSelectedTime} = useContext(MainContext)
-    const {minutes, setMinutes} = useContext(MainContext)
-    const {seconds, setSeconds} = useContext(MainContext)
-    const {autonext, setAutonext} = useContext(MainContext)
-    const {timeModified, setTimeModified} = useContext(MainContext)
-    // calculating the percentage of the circle
-
-    const circleStyle = {
-        //if time is being modified we set it to zero. otherwise we workout what percentage of time we have gone through
-        '--percent': timeModified ? 0 : (selectedTime - counter) / selectedTime * 100,
-    };
-
+    const { selectedTime, setSelectedTime } = useContext(MainContext)
+    const { minutes, setMinutes } = useContext(MainContext)
+    const { seconds, setSeconds } = useContext(MainContext)
+    const { autonext, setAutonext } = useContext(MainContext)
+    const { timeModified, setTimeModified } = useContext(MainContext)
+    //getting names from the context to change them
+    const { names, setNames } = useContext(MainContext)
 
     //  checking [counter] every time it changes. handling transition.
     useEffect(() => {
@@ -50,7 +45,22 @@ const Timer = (props) => {
                 setIsChanging(true)
                 document.getElementById('player').play()
                 // We have finished timer, time to change person and beep etc
-                // props.timeUp()
+                //this is changing to the next selected name in the context
+                const activeIndex = names.findIndex(object => {
+                    return object.isActive;
+                });
+
+                setNames(current => current.map((obj, ind) => {
+                    if (ind === activeIndex) {
+                        return { ...obj, isActive: false };
+                    }
+                    if (ind === activeIndex + 1 || (activeIndex == names.length - 1 && ind == 0)) {
+                        return { ...obj, isActive: true };
+                    }
+                    return { ...obj };
+                }))
+                //changing cat picture
+                document.getElementsByClassName("funnyWish-button")[0].click()
             }
         }
         // 
@@ -71,7 +81,6 @@ const Timer = (props) => {
     const editTimerSeconds = (newSeconds) => {
         setSeconds(newSeconds)
         setTimeModified(true)
-
         // setCounter(60 * minutes + seconds)
     }
     //enforcing the rules of input - whenever we click away from input box it will format it, reducing numbers over 59 to 59. enforcing rules of time
@@ -100,16 +109,10 @@ const Timer = (props) => {
         //this is able to be modified since it's not playing -  onBlur is when we aren't clicked inside input anymore. we call function to adjust time - max 59. onChange- every time it's modified we are editing the state
         return <> <input className='inputTimer' type="text" value={minutes} onBlur={e => adjustTime()} onChange={e => editTimerMinutes(e.target.value)}
         /> : <input className='inputTimer' type="text" value={seconds} onBlur={e => adjustTime()} onChange={e => editTimerSeconds(e.target.value)} /> </>
-
-
-
-        // return (mins > 9 ? mins : '0' + mins) + ':'
-        //     + (seconds > 9 ? seconds : '0' + seconds);
     }
 
     const startTimer = () => {
         //we see where the current mins and secs are and calculate new counter value. 
-
         if (timeModified) {
             //calculating number of seconds
             const newTime = 60 * Number(minutes) + Number(seconds)
@@ -120,7 +123,6 @@ const Timer = (props) => {
             //then it's no longer modified - we only want true after we edited it otherwise when we press pause and play again it would reset the newTime
             setTimeModified(false)
         }
-
 
         //clearing the interval - ref holds the id of the interval. if we didnt have this it would speed up every time we clicked start
         if (Ref.current) clearInterval(Ref.current);
@@ -139,7 +141,6 @@ const Timer = (props) => {
     }
 
     const stopTimer = () => {
-
         pauseTimer()
         setCounter(selectedTime)
     }
@@ -147,12 +148,12 @@ const Timer = (props) => {
     // for now all we do with playing is set the button
     let button;
     if (playing) {
-        button = <button onClick={pauseTimer}>
+        button = <button className='buttons-for-start-and-stop' onClick={pauseTimer}>
             <img src={pauseButton} alt='pause' />
         </button>;
 
     } else {
-        button = <button onClick={startTimer}>
+        button = <button className='buttons-for-start-and-stop' onClick={startTimer}>
             <img src={playButton} alt='play' />
         </button>;
     }
@@ -163,15 +164,12 @@ const Timer = (props) => {
             setCounter(count => count + 60)
             setSelectedTime(counter)
             setTimeModified(true)
-
         }
     }
     const decreaseCounterMinutes = () => {
         if (!playing) {
             if (counter >= 60) {
                 setCounter(count => count - 60)
-
-
             }
             setSelectedTime(counter)
             setTimeModified(true)
@@ -194,37 +192,27 @@ const Timer = (props) => {
         }
     }
     return (
-        <div className="box">
-            <div className="card">
-                <div className="percent">
-                    {/* circle starts */}
-                    <svg className="svgCircle">
-                        <circle cx="105" cy="105" r="100"></circle>
-                        <circle cx="105" cy="105" r="100" style={circleStyle}></circle>
-                        {/* circle ends */}
-                    </svg>
-                    <div className="number">
-
-                        <div className='Timer'>
-                            <div className='buttons__up__down'>
-                                <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes} />
-                                <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds} />
-
-                                {timer()}
-                                <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes} />
-                                <BiCaretDown className='secondsDownButton' onClick={decreaseCounterSeconds} />
-                            </div>
-                            <br></br>
-                            <button onClick={stopTimer}><img src={stopButton} alt='stop' /></button>
-
-                            {button}
-                            <button onClick={toggleAuto}>Toggle auto: {autonext ? "ON" : "OFF"}</button>
-                        </div>
-                    </div>
+        <div className="timer-box">
+            <div className="clock">
+                <div className='buttons__up__down'>
+                    <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes} />
+                    <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds} />
+                </div>
+                <div className='min-and-sec'>{timer()}</div>
+                <div className='buttons__up__down'>
+                    <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes} />
+                    <BiCaretDown className='secondsDownButton' onClick={decreaseCounterSeconds} />
                 </div>
             </div>
-        </div>
+            <div className='buttons-for-timer'>
+                <div> <button className='buttons-for-start-and-stop' onClick={stopTimer}><img src={stopButton} alt='stop' /></button>
+                {button}</div>
+                
+                <button className='button-autochange' onClick={toggleAuto}>AutoChange: {autonext ? "✅" : "❌"}</button>
+         
+            </div>
 
+        </div>
     )
 }
 

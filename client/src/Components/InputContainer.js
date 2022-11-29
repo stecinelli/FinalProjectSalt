@@ -20,6 +20,7 @@ const Input = ({ addName }) => {
         placeholder='Add new member'
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
+        required
       />
       <button
         className='name-list__button'

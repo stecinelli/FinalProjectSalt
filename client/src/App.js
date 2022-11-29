@@ -5,6 +5,7 @@ import Sound from './Components/Sound';
 import Timer from './Components/Timer';
 import Names from './Components/Names';
 import Share from './Components/Share';
+import Footer from './Components/Footer';
 import { getQueryParameter } from './Helpers/url';
 import MainContext from './Context';
 
@@ -73,6 +74,7 @@ function App() {
           <FunnyWish />
         </div>
         <Share />
+        <Footer/>
       </div>
     </MainContext.Provider>
   );
