@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from './Card'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
+  const [url, setUrl] = useState(window.location.href);
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
@@ -13,7 +14,17 @@ const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
     setNames(items);
   }
 
+  //function to copy url
+
+  const getCurrentUrl = (e) => {
+    e.preventDefault()
+    setUrl(window.location.href);
+    navigator.clipboard.writeText(url)
+    console.log(url);
+  };
+
   return (
+    <>
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <Droppable droppableId='members'>
       {(provided) => (
@@ -43,6 +54,8 @@ const Cards = ({ names, deleteName, setNames, toggleActivator }) => {
         )}
       </Droppable>
     </DragDropContext>
+    <button onClick={e => getCurrentUrl(e)}>Dupa blada</button>
+    </>
   )
 }
 
