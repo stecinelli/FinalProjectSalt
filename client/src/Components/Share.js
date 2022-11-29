@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import MainContext from '../Context'
 
 const Share = () => {
@@ -8,8 +8,8 @@ const Share = () => {
   const { playing } = useContext(MainContext)
   const { initialCounter } = useContext(MainContext)
   const { counter } = useContext(MainContext)
+  const [url, setUrl] = useState(window.location.href);
   const { autonext } = useContext(MainContext)
-
 
   const createMob = async () => {
     const newMob = {
@@ -51,6 +51,13 @@ const Share = () => {
     console.log('Patch')
   }, [names])
 
+   //function to copy url
+   const getCurrentUrl = (e) => {
+    e.preventDefault()
+    setUrl(window.location.href);
+    navigator.clipboard.writeText(url)
+  };
+
   return (
     <div className='Share'>
       <label htmlFor='ShareInput'>http://localholst:3000/</label>
@@ -74,7 +81,7 @@ const Share = () => {
         onClick={createMob}
       >
         Save
-      </button>
+      </button><button onClick={e => getCurrentUrl(e)}>Share</button>
       {/* TODO: do not allow user to save if their session is already from the db */}
     </div>
   )
