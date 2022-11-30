@@ -6,9 +6,8 @@ import { BiCaretDown, BiCaretUp } from "react-icons/bi";
 import MainContext from '../Context'
 
 
-const Timer = (props) => {
+const Timer = () => {
   //setting initial counter time and transition time
-  const initialCounter = 6
   const transitionTime = 5
   //ref ensures there's only one interval set - you need to assign the interval id to ref to keep track of it
   const Ref = useRef(null);
@@ -203,6 +202,7 @@ const Timer = (props) => {
   }
 
   return (
+
     <>
       <div className='left-side-of-clock'>
         <button className='button-autochange universal-button' onClick={toggleAuto}>AutoChange: {autonext ? "✅" : "❌"}</button>
@@ -224,6 +224,7 @@ const Timer = (props) => {
             <div> <button className='buttons-for-start-and-stop' onClick={stopTimer}><img src={stopButton} alt='stop' /></button>
               {button}</div>
           </div>
+
         </div>
       </div>
 

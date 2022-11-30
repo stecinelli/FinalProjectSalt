@@ -3,6 +3,7 @@ import github from './Buttons/GitHub-Mark-64px.png'
 
 const Footer = () => {
   return (
+
     <div className='Footer'>
       <div className='Footer-authors'>
         <h4>Made by:</h4>
@@ -28,6 +29,7 @@ const Footer = () => {
           </a>
         </p>
       </div>
+
 
     </div>
   )
