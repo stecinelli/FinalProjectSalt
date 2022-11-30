@@ -17,7 +17,7 @@ services:
       MONGO_URI: "mongodb://root:rootpassword@mongodb_container:27017?authMechanism=DEFAULT"
       PORT: 8080
     ports:
-      - 8080:8080
+      - 80:8080
     depends_on:
       - mongodb_container
 
