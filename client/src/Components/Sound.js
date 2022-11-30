@@ -57,7 +57,7 @@ const Sound = () => {
   return (
     soundIsRefreshed && <div className='Sound'>
       <div className='sound-selector-container'>
-        <label className='Sound-lable' htmlFor='SoundSelector'>🎵 </label>
+        <label className='Sound-lable' htmlFor='SoundSelector'></label>
         <select name='SoundSelector'
           onChange={getSoundFunction}
           className='Sound-selector' >

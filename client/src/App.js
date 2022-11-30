@@ -11,7 +11,7 @@ import MainContext from './Context';
 
 function App() {
 
-  const [mobName, setMobName] = useState('Mob timer')
+  const [mobName, setMobName] = useState('Binary cats')
   const [soundList, setSoundList] = useState([])
   const [initialCounter, setInitialCounter] = useState(5)
 
@@ -70,16 +70,19 @@ function App() {
   return (
     <MainContext.Provider value={context}>
       <div className="App">
-        <h3 className='hello'>{`${mobName} mob`}</h3>
-        <div className='timer-and-sound'>
+        <h3 className='hello'>{`${mobName} timer`}</h3>
+       
           <Timer />
-          <Sound />
-        </div>
+
         <div className='names-and-wish-container'>
           <Names />
           <FunnyWish />
         </div>
+        <div className='sound-and-share'>
+          <Sound />
         <Share />
+        </div>
+        
         <Footer/>
       </div>
     </MainContext.Provider>
