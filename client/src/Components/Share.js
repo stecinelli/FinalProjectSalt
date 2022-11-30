@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from 'react'
 import MainContext from '../Context'
 import QRCode from "qrcode";
 import Popup from 'reactjs-popup';
+import {copyToClipboard} from '../Helpers/clipboard'
 
 const Share = () => {
   const { mobName, setMobName } = useContext(MainContext)
@@ -78,8 +79,7 @@ const Share = () => {
   //function to copy url
   const getCurrentUrl = (e) => {
     e.preventDefault()
-    setUrl(window.location.href);
-    navigator.clipboard.writeText(url)
+    copyToClipboard(url)
   };
 
 
@@ -108,7 +108,7 @@ const Share = () => {
         onClick={createMob}
       >
         Save
-      </button> 
+      </button>
       {/* TODO: do not allow user to save if their session is already from the db */}
       <Popup
         trigger={<button className="share__button--share">Share</button>}
