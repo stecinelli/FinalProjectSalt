@@ -3,13 +3,11 @@ import playButton from './Buttons/play-button-black.png'
 import stopButton from './Buttons/stop-button-black.png'
 import pauseButton from './Buttons/pause-button-black.png'
 import { BiCaretDown, BiCaretUp } from "react-icons/bi";
-import "./Timer.css"
 import MainContext from '../Context'
 
 
-const Timer = (props) => {
+const Timer = () => {
   //setting initial counter time and transition time
-  const initialCounter = 6
   const transitionTime = 5
   //ref ensures there's only one interval set - you need to assign the interval id to ref to keep track of it
   const Ref = useRef(null);
@@ -210,7 +208,7 @@ const Timer = (props) => {
           <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes} />
           <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds} />
         </div>
-        <div className='min-and-sec'>{timer()}</div>
+        <div className='min-and-sec'>{isChanging ? <div className='timetochange'> Time to change!!</div> : timer()}</div>
         <div className='buttons__up__down'>
           <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes} />
           <BiCaretDown className='secondsDownButton' onClick={decreaseCounterSeconds} />

@@ -51,19 +51,18 @@ function FunnyWish() {
 
     };
 
-    // useEffect(() => {
-    //     if (savedCat.length === 0) {
-    //         handleFetch()
-    //     }
-    //     if (isChanging) {
-    //         handleFetch()
-    //         changeActiveName()
-    //     }
-    // }, [isChanging])
+    useEffect(() => {
+        if (savedCat.length === 0) {
+            handleFetch()
+        }
+        if (isChanging) {
+            handleFetch()
+            changeActiveName()
+        }
+    }, [isChanging])
 
     return (
         <div className='funnyWish'>
-            {/* <button onClick={changeActiveName}>Click </button> */}
             <div className='wish-and-button'>
                 <p className='luck'>Good luck, {changeActiveName()}!</p>
                 <button className='funnyWish-button' onClick={handleFetch}>
