@@ -12,7 +12,7 @@ const Names = () => {
   const { names, setNames } = useContext(MainContext)
   const { mobName } = useContext(MainContext)
   const { isChanging, setIsChanging } = useContext(MainContext)
-  const [idToToggle, setIdToToggle] = useState('')
+  // const [idToToggle, setIdToToggle] = useState('')
   // const [isActive, setIsActive] = useState(false)
 
   // useEffect(() => {
@@ -70,8 +70,8 @@ const Names = () => {
       updatedNames = names.filter(person => person.id !== id);
     }
     setNames(updatedNames)
-    
   }
+
 
   // toggle activator
   const toggleActivator = (id) => {
@@ -95,7 +95,7 @@ const Names = () => {
   // }, [isChanging])
   return (
     <div className='input-and-cards'>
-      <button onClick={makeNextPersonIsActive}> Click </button>
+      {/* <button onClick={makeNextPersonIsActive}> Click </button> */}
       <Input
         names={names}
         addName={addName} />
