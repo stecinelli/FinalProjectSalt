@@ -38,23 +38,40 @@ const Names = () => {
 
   //delete name
   const deleteName = id => {
-    const nameToRemove = (names.filter(person => person.id === id))
-    if (nameToRemove[0].isActive === true) {
-      const index = names.map(person => person.isActive).indexOf(true)
-      setIdToToggle(names[index].id)
-      setNames(names.filter(person => person.id !== id))
+    const currentActiveIndex = names.findIndex(person => person.isActive);
+    const isItemToDeleteActive = names[currentActiveIndex].id === id;
+    let updatedNames = [];
+    if (isItemToDeleteActive) {
+      let nextPersonId;
+      updatedNames = names.map((person, index) => {
+        if (index === currentActiveIndex && person.isActive) {
+          if(names[currentActiveIndex + 1]) {
+            nextPersonId = names[currentActiveIndex + 1].id;
+          } else if (names.length) {
+            nextPersonId = names[0].id;
+          }
+          return {
+            ...person,
+            isActive: false
+          }
+        }
+        return person;
+      }).filter(person => person.id !== id);
+      updatedNames = updatedNames.map(person => {
+        if (person.id === nextPersonId) {
+          return {
+            ...person,
+            isActive: true
+          }
+        }
+        return person;
+      })
+    } else {
+      updatedNames = names.filter(person => person.id !== id);
     }
-    setNames(names.filter(person => person.id !== id))
-    console.log('Darek is inside', names)
+    setNames(updatedNames)
+    
   }
-  console.log('Darek is outside', names)
-
-// useEffect(() => {
-//   toggleActivator(idToToggle)
-
-// }, [idToToggle])
-
-
 
   // toggle activator
   const toggleActivator = (id) => {
