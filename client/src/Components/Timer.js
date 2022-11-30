@@ -202,27 +202,35 @@ const Timer = () => {
   }
 
   return (
-    <div className="timer-box">
-      <div className="clock">
-        <div className='buttons__up__down'>
-          <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes} />
-          <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds} />
-        </div>
-        <div className='min-and-sec'>{isChanging ? <div className='timetochange'> Time to change!!</div> : timer()}</div>
-        <div className='buttons__up__down'>
-          <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes} />
-          <BiCaretDown className='secondsDownButton' onClick={decreaseCounterSeconds} />
+
+    <>
+      <div className='left-side-of-clock'>
+        <button className='button-autochange universal-button' onClick={toggleAuto}>AutoChange: {autonext ? "✅" : "❌"}</button>
+      </div>
+      <div className='right-side-of-clock'>
+        <div className='clock-central-part'>
+          <div className="clock">
+            <div className='buttons__up__down'>
+              <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes} />
+              <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds} />
+            </div>
+            <div className='min-and-sec'>{isChanging ? <div className='timetochange'> Next🚀</div> : timer()}</div>
+            <div className='buttons__up__down'>
+              <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes} />
+              <BiCaretDown className='secondsDownButton' onClick={decreaseCounterSeconds} />
+            </div>
+          </div>
+          <div className='buttons-for-timer'>
+            <div> <button className='buttons-for-start-and-stop' onClick={stopTimer}><img src={stopButton} alt='stop' /></button>
+              {button}</div>
+          </div>
+
         </div>
       </div>
-      <div className='buttons-for-timer'>
-        <div> <button className='buttons-for-start-and-stop' onClick={stopTimer}><img src={stopButton} alt='stop' /></button>
-          {button}</div>
 
-        <button className='button-autochange' onClick={toggleAuto}>AutoChange: {autonext ? "✅" : "❌"}</button>
+    </>
 
-      </div>
 
-    </div>
   )
 
 }

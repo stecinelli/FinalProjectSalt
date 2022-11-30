@@ -10,9 +10,11 @@ import { getQueryParameter } from './Helpers/url';
 import MainContext from './Context';
 
 function App() {
-  const [mobName, setMobName] = useState('Mob Timer')
+
+  const [mobName, setMobName] = useState('Mob timer')
   const [soundList, setSoundList] = useState([])
-  const [initialCounter, setInitialCounter] = useState(300)
+  const [initialCounter, setInitialCounter] = useState(5)
+
   const [counter, setCounter] = useState(initialCounter)
   const [playing, setPlaying] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
