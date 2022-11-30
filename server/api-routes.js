@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs')
 const unirest = require('unirest');
-const { getMobByName, insertMob, updateMobNames, updateMobTime, updateMobSound } = require('./persistence');
+const { getMobByName, insertMob, updateMobByName } = require('./persistence');
 
 const router = new express.Router();
 
@@ -85,32 +85,24 @@ router.patch('/mobs', async (req, res) => {
   const mob = req.body;
 
   const existingMob = await getMobByName(mob.mob);
-
   if (!existingMob) {
     res
       .status(404)
       .json({
-        message: "Mob do not exist"
+        message: "Mob does not exist"
       });
+    return;
   }
 
-  if (mob.names) {
-    const response = await updateMobNames(mob.mob, mob.names)
-    res.status(200).send()
+  if (!mob.names && !mob.timeInitial && !mob.sounds && !mob.timerEndDate) {
+    res.status(400).send();
+    return;
   }
 
-  if (mob.timeInitial) {
-    const response = await updateMobTime(mob.mob, mob)
-    res.status(200).send()
-  }
+  const mobToUpdate = Object.assign(existingMob, mob)
 
-  if (mob.sounds) {
-    const response = await updateMobSound(mob.mob, mob.sounds)
-    res.status(200).send()
-  }
-
-  res.status(400).send()
-
+  await updateMobByName(mob.mob, mobToUpdate);
+  res.status(200).send();
 });
 
 

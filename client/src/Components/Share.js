@@ -10,8 +10,9 @@ const Share = () => {
   const { soundList } = useContext(MainContext)
   const { playing } = useContext(MainContext)
   const { initialCounter } = useContext(MainContext)
-  const { counter } = useContext(MainContext)
+  const { timerEndDate } = useContext(MainContext)
   const { autonext } = useContext(MainContext)
+  const { counter } = useContext(MainContext)
   const canvasRef = useRef();
 
   const [url, setUrl] = useState(window.location.href);
@@ -21,10 +22,11 @@ const Share = () => {
       "mob": mobName,
       "sounds": soundList,
       "timeInitial": initialCounter,
-      "timeLeft": counter,
       "playing": playing,
       "names": names,
       "autonext": autonext,
+      "timeLeft": counter,
+      "timerEndDate": timerEndDate,
     }
     await fetch('/api/mobs', {
       method: 'POST',
@@ -54,27 +56,6 @@ const Share = () => {
 
     updateMobName()
   }, [names])
-
-  useEffect(() => {
-    const updateMobTime = async () => {
-      const changedMob = {
-        "mob": mobName,
-        "timeInitial": initialCounter,
-        "timeLeft": counter,
-        "playing": playing,
-        "autonext": autonext,
-      }
-      await fetch('/api/mobs', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(changedMob)
-      })
-    }
-
-    updateMobTime()
-  }, [initialCounter, counter, playing, autonext])
 
   //function to copy url
   const getCurrentUrl = (e) => {

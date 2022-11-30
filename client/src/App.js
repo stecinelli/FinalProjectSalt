@@ -25,6 +25,7 @@ function App() {
   const [seconds, setSeconds] = useState('')
   const [autonext, setAutonext] = useState(true)
   const [timeModified, setTimeModified] = useState(false)
+  const [timerEndDate, setTimerEndDate] = useState('')
 
 
 
@@ -40,6 +41,7 @@ function App() {
       setNames(apiResult.names)
       setPlaying(apiResult.playing)
       setAutonext(apiResult.autonext)
+      setTimerEndDate(apiResult.timerEndDate)
       // TODO: memorize getters and setters to persist on localstorage
     }
 
@@ -62,6 +64,7 @@ function App() {
     seconds, setSeconds,
     autonext, setAutonext,
     timeModified, setTimeModified,
+    timerEndDate, setTimerEndDate,
   }
 
   return (

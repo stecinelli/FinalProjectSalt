@@ -1,5 +1,5 @@
- const { uuid } = require('uuidv4');
- const MongoClient = require('mongodb').MongoClient;
+const { uuid } = require('uuidv4');
+const MongoClient = require('mongodb').MongoClient;
 
 var uri = process.env.MONGO_URI || "mongodb://root:rootpassword@localhost:27017?authMechanism=DEFAULT";
 const client = new MongoClient(uri);
@@ -21,41 +21,18 @@ async function insertMob(mob) {
   await collection.insertOne(mob);
 }
 
-async function updateMobNames(name, change) {
+async function updateMobByName(name, mob) {
   const collection = await getCollection('mobs');
   return collection.findOneAndUpdate(
     { mob: name },
-    {$set: { names: change }}
-  );
-}
-
-async function updateMobTime(name, change) {
-  const collection = await getCollection('mobs');
-  return collection.findOneAndUpdate(
-    { mob: name },
-    {$set: {
-      timeInitial: change.timeInitial,
-      timeLeft: change.timeLeft,
-      playing:change.playing,
-      autonext: change.autonext
-    }},
-  );
-}
-
-async function updateMobSound(name, change) {
-  const collection = await getCollection('mobs');
-  return collection.findOneAndUpdate(
-    { mob: name },
-    {$set: { sounds: change }},
+    { $set: mob },
   );
 }
 
 module.exports = {
   getMobByName,
   insertMob,
-  updateMobNames,
-  updateMobTime,
-  updateMobSound,
+  updateMobByName,
 }
 
 // use 'docker-compose up -d' to start the database
