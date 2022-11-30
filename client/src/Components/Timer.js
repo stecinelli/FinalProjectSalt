@@ -210,7 +210,7 @@ const Timer = (props) => {
           <BiCaretUp className='minutesUpButton' onClick={increaseCounterMinutes} />
           <BiCaretUp className='secondsUpButton' onClick={increaseCounterSeconds} />
         </div>
-        <div className='min-and-sec'>{timer()}</div>
+        <div className='min-and-sec'>{isChanging ? <div className='timetochange'> Time to change!!</div> : timer()}</div>
         <div className='buttons__up__down'>
           <BiCaretDown className='minutesDownButton' onClick={decreaseCounterMinutes} />
           <BiCaretDown className='secondsDownButton' onClick={decreaseCounterSeconds} />

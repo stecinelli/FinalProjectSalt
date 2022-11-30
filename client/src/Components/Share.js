@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import MainContext from '../Context'
 import QRCode from "qrcode";
+import Popup from 'reactjs-popup';
 
 const Share = () => {
   const { mobName, setMobName } = useContext(MainContext)
@@ -81,24 +82,16 @@ const Share = () => {
     navigator.clipboard.writeText(url)
   };
 
-  //qr code
-  useEffect(() => {
-    QRCode.toCanvas(
-      canvasRef.current,
-      url || ' ',
-      (error) => error && console.error(error)
-    );
-  }, [url]);
 
 
   return (
-    <div className='Share'>
-      <label htmlFor='ShareInput'>http://localholst:3000/</label>
+    <div className='share__container'>
       <input
         type='text'
-        name='ShareInput'
+        name='share__input'
         className='Share-input'
-        placeholder='your mob name'
+        required
+        placeholder='Enter your team name'
         onKeyDown={e => {
           if (e.key.toLowerCase() === 'enter') {
             e.preventDefault();
@@ -108,14 +101,45 @@ const Share = () => {
         onChange={e => setMobName(e.target.value)}
       />
       <button
-        className='Share-input--button'
+        className='share__button--save'
         type='button'
         id='createMobButton'
         onClick={createMob}
       >
         Save
-      </button><button onClick={e => getCurrentUrl(e)}>Share</button><canvas ref={canvasRef}/>
+      </button> 
       {/* TODO: do not allow user to save if their session is already from the db */}
+      <Popup
+        trigger={<button className="share__button--share">Share</button>}
+        modal
+        nested
+        onOpen={() => {
+          QRCode.toCanvas(
+            canvasRef.current,
+            url || ' ',
+            (error) => error && console.error(error)
+          );}
+        }
+      >
+        {close => (
+          <div className="share__popup">
+            <button className="share__popup--button-close" onClick={close}>
+              &times;
+            </button>
+            <div className="share__popup--content">
+              <button className="share__popup--button-copy" onClick={e => getCurrentUrl(e)}>Copy link</button>
+              <canvas ref={canvasRef}/>
+              {/* <button
+                className="button"
+                onClick={() => {
+                  close();
+                }}
+              >Close
+              </button> */}
+            </div>
+          </div>
+        )}
+      </Popup>
     </div>
   )
 }
