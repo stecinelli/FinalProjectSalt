@@ -9,15 +9,19 @@
   box-sizing: border-box;
   font-family: 'Graduate', cursive;
 }
+
 input {
   all: unset;
 }
+
 button {
   cursor: pointer;
   border-radius: 5px;
   border: 2px rgb(54, 118, 110) solid;
 }
-ul, li {
+
+ul,
+li {
   list-style-type: none;
   margin-block-start: 0;
   margin-block-end: 0;
@@ -25,233 +29,7 @@ ul, li {
   margin-inline-end: 0;
   padding-inline-start: 0;
 }
-.App {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-}
-.hello{
-  font-weight: 700;
-  font-size: 40px;
-  margin: 1rem 0;
-}
-.timer-and-sound {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  /* width: 80rem; */
-  /* background-color: #959DA5; */
-}
-
-/* Timer */
-.timer-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-.clock {
-  /* background-color: #f22828; */
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center;  */
-
-
-}
-
-.buttons__up__down {
-  background-color: #ffeefc;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  font-size: 30px;
- 
-  
-}
-
-.buttons__up__down svg {
-  width: 100%;
-  /* background-color: #ffcbcb; */
-}
-.min-and-sec {
-  /* background-color: #faff72; */
-  display: flex;
-  flex-direction: row;
-  font-size: 80px;
-
-}
-.inputTimer {
-  /* background-color: #db8a8a; */
-  font-size: 80px;
-  width: 100px;
-  /* block-size: fit-content; */
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-around; */
-  
-}
-.buttons-for-timer {
-  /* background-color: #f6ff7c; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: 8rem;
-}
-.buttons-for-start-and-stop {
-  background-color: inherit;
-  /* color: #f22828; */
-  border: 0px ;
-}
-.buttons-for-start-and-stop img {
-  background-color: inherit;
-  width: 80px;
-}
-.button-autochange {
-  /* background-color: #ffd2d2; */
-  width: fit-content;
-  all: unset;
-  border: 1px dashed rgb(148, 148, 255);
-  padding: 2px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.button-autochange:hover{
-  background-color: rgb(240, 240, 255)
-}
-
-/* Sound */
-.Sound {
-  font-size: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-left: 5rem;
-  background-color: rgb(189, 255, 255);
-}
-.Sound-lable{
-  margin-right: 0.5rem;
-  background-color: rgb(255, 205, 139);
-}
-.Sound-selector {
-  font-size: 20px;
-  background-color: rgb(227, 127, 255);
-}
-.Sound-player--button {
-  background-color: #99ccff;
-}
-.Sound-input--label {
-  background-color: #0080ff;
-}
-.Sound-input {
-  background-color: rgb(235, 164, 71);
-}
-.submit {
-  background-color: #0080ff;
-}
-
-
-
-.names-and-wish-container {
-  /* background-color: rgb(250, 215, 215); */
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-  justify-content: center;
-  padding: 2rem;
-}
-.input-and-cards {
-  /* background-color: rgb(219, 181, 255); */
-  width: 40rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-right: 1rem;
-}
-.input {
-  /* background-color: rgb(104, 104, 104); */
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-.name-list__input {
-  width: 100%;
-  padding: 8px;
-  border-radius: 5px;
-  margin-right: 0.5rem;
-}
-.name__list {
-  /* background-color: rgb(0, 0, 0); */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 0.5rem;
-}
-.name-list__card {
-  list-style: none;
-  cursor: move;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  /* background-color: antiquewhite; */
-  border-radius: 5px;
-  border: 2px dashed pink;
-  width: 100%;
-  padding: 8px;
-  margin: 3px 0;
-  background-color: #fffafe;
-}
-.person {
-  word-break: break-all;
-  white-space: normal;
-  width: 95%;
-}
-.card--active{
-  background-color: rgb(255, 234, 255);
-}
-.name-list__card--button {
-  color: 'red';
-   cursor: 'pointer';
-    margin: '0.5rem';
-}
-.funnyWish {
-  /* background-color: rgb(240, 255, 245); */
-  width: 40rem;
-}
-.wish-and-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-.luck {
-  font-size: 20px;
-  padding: 0.5rem;
-
-}
-.image {
-  width: 100%;
-  border-radius: 8px;
-}
-.name__list {
-  /* background-color: rgb(22, 27, 32); */
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.name-list__button {
+.universal-button {
   appearance: none;
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
@@ -276,11 +54,355 @@ ul, li {
   word-wrap: break-word;
 }
 
-.name-list__button:hover {
+.universal-button:hover {
   background-color: #F3F4F6;
   text-decoration: none;
   transition-duration: 0.1s;
 }
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+}
+
+.hello {
+  font-weight: 700;
+  font-size: 40px;
+  margin: 1rem 0;
+}
+
+.timer-and-sound {
+  /* display: grid;
+  grid-template-columns: 66.66% 33.33% ; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Timer */
+/* .timer-box { */
+  /* display: grid;
+  grid-template-columns: 50% 50%;
+  width: 100%; */
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+} */
+
+.clock {
+  /* padding: 10px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons__up__down {
+  background-color: #ffeefc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 30px;
+}
+
+.buttons__up__down svg {
+  width: 100%;
+  /* background-color: #ffcbcb; */
+}
+
+.min-and-sec {
+  /* background-color: #faff72; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 100px;
+  text-align: center;
+}
+
+.inputTimer {
+  /* background-color: #db8a8a; */
+  font-size: 120px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* block-size: fit-content; */
+  /* display: flex;
+  flex-direction: row; */
+  /* justify-content: space-around; */
+}
+
+.buttons-for-timer {
+  /* background-color: #f6ff7c; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  /* height: 8rem; */
+  margin-top: 3px;
+}
+
+.buttons-for-start-and-stop {
+  background-color: inherit;
+  /* color: #f22828; */
+  border: 0px;
+}
+
+.buttons-for-start-and-stop img {
+  background-color: inherit;
+  width: 80px;
+}
+
+.left-side-of-clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #c2e4ff; */
+  width: 333px;
+}
+
+.button-autochange {
+
+  border: 2px dashed rgb(105, 149, 139);
+  /* background-color: #f4fff2; */
+
+}
+
+.button-autochange:hover {
+  background-color: rgb(233, 255, 250);
+}
+
+.right-side-of-clock {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* background-color: #eac2ff; */
+  width: 333px;
+}
+
+
+.timetochange {
+  margin: 16px 19.42px;
+  font-size: 80px;
+}
+
+/* Sound */
+.Sound {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #fdffc2; */
+  width: 333px;
+  /* margin-left: 5rem; */
+  /* background-color: rgb(189, 255, 255); */
+}
+
+.sound-selector-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.Sound-selector {
+  /* appearance: none; */
+  background-color: #ffffff;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px;
+  /* position: relative; */
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+
+.upload-your-sound-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+.upload-your-own-sound-button {
+  margin-right: 4px;
+}
+
+.Sound-lable {
+  margin-right: 0.5rem;
+  /* background-color: rgb(255, 205, 139); */
+}
+
+.Sound-player--button {
+  background-color: #2a6fb4;
+}
+.file-choosen {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.Sound-input--label {
+  background-color: #0080ff;
+}
+
+.Sound-input {
+  background-color: rgb(211, 198, 180);
+
+
+}
+
+.submit {
+  background-color: #0080ff;
+}
+
+
+
+.names-and-wish-container {
+  /* background-color: rgb(250, 215, 215); */
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.input-and-cards {
+  /* background-color: rgb(219, 181, 255); */
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 1rem;
+}
+
+.input {
+  /* background-color: rgb(104, 104, 104); */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.name-list__input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+  background-color: #f0f8ff;
+  border: 2px dashed rgb(200, 200, 209);
+}
+
+.name__list {
+  /* background-color: rgb(0, 0, 0); */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.name-list__card {
+  list-style: none;
+  cursor: move;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: antiquewhite; */
+  border-radius: 5px;
+  border: 2px dashed pink;
+  width: 100%;
+  padding: 8px;
+  margin: 3px 0;
+  background-color: #fffafe;
+}
+
+.person {
+  word-break: break-all;
+  white-space: normal;
+  width: 95%;
+}
+
+.card--active {
+  background-color: rgb(255, 234, 255);
+}
+
+.name-list__card--button {
+  color: 'red';
+  cursor: 'pointer';
+  margin: '0.5rem';
+}
+
+.funnyWish {
+  /* background-color: rgb(240, 255, 245); */
+  width: 30rem;
+}
+
+.wish-and-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  /* background-color: #e4f3ff; */
+  margin-bottom: 1rem;
+}
+
+.luck {
+  font-size: 15px;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: rgb(255, 247, 232);
+  margin-left: 2rem;
+  border: 2px dashed rgb(251, 0, 113);
+  font-weight: 900;
+
+}
+
+.funnyWish-image--container {
+  background-image: url('frame4b.png');
+  background-size: cover;
+  text-align: center;
+  height: 20rem;
+  display: flex;
+  padding: auto;
+  justify-content: center;
+  /* border: dashed purple;
+  border-radius: 8px; */
+}
+
+.image {
+  width: 50%;
+  height: 55%;
+  border-radius: 8px;
+  align-self: center;
+}
+
+.name__list {
+  /* background-color: rgb(22, 27, 32); */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
 
 .name-list__button:disabled {
   background-color: #FAFBFC;
@@ -307,13 +429,13 @@ ul, li {
   display: none;
 }
 
-.Sound-player--button > img {
+.Sound-player--button>img {
   width: 25px;
   margin: 0;
   padding: 0;
 }
 
-.two-buttons > button > img {
+.two-buttons>button>img {
   width: 40px;
   margin: 0;
   padding: 0;
@@ -326,38 +448,43 @@ ul, li {
   margin-left: 0.3rem;
 }
 
-.two-buttons > button {
+.two-buttons>button {
   border: none;
   background-color: white;
   color: none;
 }
 
-.funnyWish-button > img {
-  width: 25px;
+.funnyWish-button>img {
+  width: 30%;
   margin: 0;
   padding: 0;
 }
 
 .funnyWish-button {
   border: none;
-  background-color: white;
+  background-color: inherit;
   color: none;
+  height: 100%;
+  /* background-color: #2a6fb4; */
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
   .timer-and-sound {
     flex-direction: column;
     width: 100%;
   }
+
   .Sound {
     margin: 1rem 0;
   }
+
   .names-and-wish-container {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding: 1rem;
   }
+
   .timer-box {
     display: flex;
     flex-direction: column;
@@ -365,23 +492,24 @@ ul, li {
     justify-content: center;
     width: 100%;
   }
+
   .image {
     width: 100%;
   }
+
   .input-and-cards {
     width: 100%;
-    padding-right: 0; 
+    padding-right: 0;
   }
+
   .input {
     width: 100%;
   }
+
   .name-list__card {
     width: 100%;
   }
-  .wish-and-button {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
+
   .funnyWish {
     width: 100%;
     margin-top: 1rem;
@@ -423,12 +551,12 @@ ul, li {
 }
 
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+.container:hover input~.checkmark {
   background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container input:checked~.checkmark {
   background-color: #2196F3;
 }
 
@@ -440,7 +568,7 @@ ul, li {
 }
 
 /* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
+.container input:checked~.checkmark:after {
   display: block;
 }
 
@@ -456,3 +584,66 @@ ul, li {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.Share {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #b4ddff;
+}
+
+.Footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 40rem;
+  margin-top: 10px;
+}
+
+.Footer-authors {
+  order: 1;
+  flex-grow: 1;
+  align-self: center;
+}
+
+.Footer-authors > p {
+  margin-top: 5px;
+}
+
+.Footer-authors a:link {
+  text-decoration: none;
+  color: black;
+}
+
+.Footer-github {
+  order: 2;
+  flex-grow: 1;
+  align-self: center;
+  text-align: center;
+}
+
+.Footer-github > p {
+  margin: 15px;
+}
+
+/* .funnyWish-image--container {
+  background-image: url('frame.png');
+  background-size: cover;
+  text-align: center;
+  height: 20rem;
+  display: flex;
+  padding: auto;
+  justify-content: center; */
+  /* border: dashed purple;
+  border-radius: 8px; */
+
+
+/* .image {
+  width: 70%;
+  height: 70%;
+  border-radius: 8px;
+  align-self: center; */
+

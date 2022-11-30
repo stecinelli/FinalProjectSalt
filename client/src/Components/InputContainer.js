@@ -23,7 +23,7 @@ const Input = ({ addName }) => {
         required
       />
       <button
-        className='name-list__button'
+        className='universal-button'
         type='submit'
       >Add</button>
     </form>

@@ -74,8 +74,8 @@ const Share = () => {
     updateMobTime()
   }, [initialCounter, counter, playing, autonext])
 
-   //function to copy url
-   const getCurrentUrl = (e) => {
+  //function to copy url
+  const getCurrentUrl = (e) => {
     e.preventDefault()
     setUrl(window.location.href);
     navigator.clipboard.writeText(url)
@@ -93,7 +93,7 @@ const Share = () => {
 
   return (
     <div className='Share'>
-      <label htmlFor='ShareInput'>http://localholst:3000/</label>
+      <label htmlFor='ShareInput'>/</label>
       <input
         type='text'
         name='ShareInput'
@@ -108,14 +108,14 @@ const Share = () => {
         onChange={e => setMobName(e.target.value)}
       />
       <button
-        className='Share-input--button'
+        className='Share-input--button universal-button'
         type='button'
         id='createMobButton'
         onClick={createMob}
       >
         Save
-      </button><button onClick={e => getCurrentUrl(e)}>Share</button><canvas ref={canvasRef}/>
-      {/* TODO: do not allow user to save if their session is already from the db */}
+      </button>
+      <button className='universal-button' onClick={e => getCurrentUrl(e)}>Share</button><canvas ref={canvasRef} />
     </div>
   )
 }

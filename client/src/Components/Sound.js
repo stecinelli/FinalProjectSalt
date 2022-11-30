@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useContext } from 'react'
 import MainContext from '../Context'
-import playButton from './Buttons/play-button-pink.png'
+import playButton from './Buttons/play-button-black.png'
 
 const Sound = () => {
   const { soundList, setSoundList } = useContext(MainContext)
   const [soundToPlay, setSoundToPlay] = useState([])
   const [soundIsRefreshed, setSoundIsRefreshed] = useState(true)
+  const hiddenFileInput = React.useRef(null);
+  const [soundIsDownloaded, setSoundIsDownloaded] = useState(false)
+
 
   useEffect(() => {
     fetch('/api/sounds')
@@ -31,6 +34,7 @@ const Sound = () => {
   const saveChanges = e => {
     e.preventDefault()
     setSoundFile(e.target.files[0])
+    setSoundIsDownloaded(true)
   }
 
   const handleSoundUploadChange = async () => {
@@ -42,12 +46,18 @@ const Sound = () => {
       body: formData,
     })
     setSoundIsRefreshed(true)
+    setSoundIsDownloaded(false)
   }
+
+
+  const handleUploadClick = event => {
+    hiddenFileInput.current.click();
+  };
 
   return (
     soundIsRefreshed && <div className='Sound'>
-
-        <label className='Sound-lable' htmlFor='SoundSelector'>🎶 </label>
+      <div className='sound-selector-container'>
+        <label className='Sound-lable' htmlFor='SoundSelector'>🎵 </label>
         <select name='SoundSelector'
           onChange={getSoundFunction}
           className='Sound-selector' >
@@ -59,29 +69,39 @@ const Sound = () => {
             </option>
           )}
         </select>
-
-
         {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
-        <>
-          <audio id='player' src={soundToPlay[0].url}></audio>
-          <button className='Sound-player--button' onClick={playSound}>
-            <img src={playButton} alt='play' />
-          </button>
+          <>
+            <audio id='player' src={soundToPlay[0].url}></audio>
+            <button className='Sound-player--button' onClick={playSound}>
+              <img src={playButton} alt='play' />
+            </button>
+          </>
+        }
+      </div>
 
-
-          <label className='Sound-input--label' htmlFor='SoundInput'>Upload your sound:</label>
-          <input
-            className='Sound-input'
-            type='file'
-            name='SoundInput'
-            accept='audio/*'
-            environment
-            onChange={saveChanges}
-          />
-          <button className='submit' onClick={handleSoundUploadChange}>Submit</button>
-        </>
-      }
-
+      <div className='upload-your-sound-container'>
+        {soundToPlay.length > 0 && soundToPlay[0] !== undefined &&
+          <>
+            {/* <label className='Sound-input--label' htmlFor='SoundInput'>Upload your 💃 :</label> */}
+            <button onClick={handleUploadClick} className='universal-button upload-your-own-sound-button'>
+            Choose your sound 💃
+            </button>
+            <input
+              className='Sound-input '
+              type='file'
+              name='SoundInput'
+              accept='audio/*'
+              environment
+              onChange={saveChanges}
+              style={{ display: 'none' }}
+              ref={hiddenFileInput}
+       
+            />
+            <button className='universal-button' onClick={handleSoundUploadChange}>Upload</button>
+          </>
+        }
+      </div>
+        {soundIsDownloaded && <div className='file-choosen'>🎵 file choosen</div>}
     </div>
   )
 }
