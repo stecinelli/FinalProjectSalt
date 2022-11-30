@@ -10,9 +10,9 @@ import { getQueryParameter } from './Helpers/url';
 import MainContext from './Context';
 
 function App() {
-  const [mobName, setMobName] = useState('Hello Kitties!')
+  const [mobName, setMobName] = useState('Mob Timer')
   const [soundList, setSoundList] = useState([])
-  const [initialCounter, setInitialCounter] = useState(6)
+  const [initialCounter, setInitialCounter] = useState(300)
   const [counter, setCounter] = useState(initialCounter)
   const [playing, setPlaying] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
@@ -65,7 +65,7 @@ function App() {
   return (
     <MainContext.Provider value={context}>
       <div className="App">
-        <h3 className='hello'>{mobName}</h3>
+        <h3 className='hello'>{`${mobName} mob`}</h3>
         <div className='timer-and-sound'>
           <Timer />
           <Sound />

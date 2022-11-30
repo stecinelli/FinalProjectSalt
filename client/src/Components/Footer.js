@@ -6,16 +6,16 @@ const Footer = () => {
     <div>
       <h4>About us:</h4>
       <p>
-        <a href='https://github.com/stecinelli'>Stephanie Cinelli</a>
+        <a href='https://www.linkedin.com/in/stephanie-cinelli-ruzzi/'>Stephanie Cinelli</a>
       </p>
       <p>
-        <a href='https://github.com/zappip'>Paula Zappi</a>
+        <a href='https://www.linkedin.com/in/paula-zappi-aa6717253/'>Paula Zappi</a>
       </p>
       <p>
-        <a href='https://github.com/Mashidzasupergirl'>Maria Khimochkina</a>
+        <a href='https://www.linkedin.com/in/maria-khimochkina/'>Maria Khimochkina</a>
       </p>
       <p>
-        <a href='https://github.com/Dariusz-Wolontariusz'>Darek Ciazynski</a>
+        <a href='https://www.linkedin.com/in/dariusz-ciazynski/'>Darek Ciazynski</a>
       </p>
 
       <h4>Our project:</h4>
