@@ -75,8 +75,8 @@ const Share = () => {
     updateMobTime()
   }, [initialCounter, counter, playing, autonext])
 
-   //function to copy url
-   const getCurrentUrl = (e) => {
+  //function to copy url
+  const getCurrentUrl = (e) => {
     e.preventDefault()
     setUrl(window.location.href);
     navigator.clipboard.writeText(url)
@@ -85,6 +85,7 @@ const Share = () => {
 
 
   return (
+
     <div className='share__container'>
       <input
         type='text'
