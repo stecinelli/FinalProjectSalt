@@ -202,7 +202,6 @@ const Timer = () => {
   }
 
   return (
-
     <>
       <div className='left-side-of-clock'>
         <button className='button-autochange universal-button' onClick={toggleAuto}>AutoChange: {autonext ? "✅" : "❌"}</button>
@@ -224,7 +223,6 @@ const Timer = () => {
             <div> <button className='buttons-for-start-and-stop' onClick={stopTimer}><img src={stopButton} alt='stop' /></button>
               {button}</div>
           </div>
-
         </div>
       </div>
 
