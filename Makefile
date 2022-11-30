@@ -11,3 +11,10 @@ install-dependencies-client:
 
 install-dependencies-server:
 	cd server; npm install
+
+build-prod: install-dependencies-client build-client
+	rm -rf deploy
+	mkdir deploy
+	cp -r server/* deploy/
+	mv client/build/* deploy/public/
+	cd deploy; npm install
