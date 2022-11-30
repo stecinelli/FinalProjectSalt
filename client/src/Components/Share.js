@@ -101,8 +101,9 @@ const Share = () => {
         }}
         onChange={e => setMobName(e.target.value)}
       />
+      <div className='save-and-share-buttons'>
       <button
-        className='share__button--save'
+        className='share__button--save universal-button'
         type='button'
         id='createMobButton'
         onClick={createMob}
@@ -111,7 +112,7 @@ const Share = () => {
       </button>
       {/* TODO: do not allow user to save if their session is already from the db */}
       <Popup
-        trigger={<button className="share__button--share">Share</button>}
+        trigger={<button className="share__button--share universal-button">Share</button>}
         modal
         nested
         onOpen={() => {
@@ -124,11 +125,11 @@ const Share = () => {
       >
         {close => (
           <div className="share__popup">
-            <button className="share__popup--button-close" onClick={close}>
+            <button className="share__popup--button-close universal-button" onClick={close}>
               &times;
             </button>
             <div className="share__popup--content">
-              <button className="share__popup--button-copy" onClick={e => getCurrentUrl(e)}>Copy link</button>
+              <button className="share__popup--button-copy universal-button" onClick={e => getCurrentUrl(e)}>Copy link</button>
               <canvas ref={canvasRef}/>
               {/* <button
                 className="button"
@@ -141,6 +142,7 @@ const Share = () => {
           </div>
         )}
       </Popup>
+      </div>
     </div>
   )
 }
