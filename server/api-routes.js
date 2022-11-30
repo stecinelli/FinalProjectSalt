@@ -19,7 +19,7 @@ router.get('/sounds', (req, res) => {
   const result = files.map(file => {
     return {
       title: file.split('.')[0].charAt(0).toUpperCase() + file.split('.')[0].slice(1),
-      url: `http://localhost:8080/sounds/${file}`,
+      url: `/sounds/${file}`,
     };
   });
   res.json(result);
