@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import MainContext from '../Context'
+import QRCode from "qrcode";
 
 const Share = () => {
   const { mobName, setMobName } = useContext(MainContext)
@@ -9,6 +10,7 @@ const Share = () => {
   const { initialCounter } = useContext(MainContext)
   const { counter } = useContext(MainContext)
   const { autonext } = useContext(MainContext)
+  const canvasRef = useRef();
 
   const [url, setUrl] = useState(window.location.href);
 
@@ -79,6 +81,16 @@ const Share = () => {
     navigator.clipboard.writeText(url)
   };
 
+  //qr code
+  useEffect(() => {
+    QRCode.toCanvas(
+      canvasRef.current,
+      url || ' ',
+      (error) => error && console.error(error)
+    );
+  }, [url]);
+
+
   return (
     <div className='Share'>
       <label htmlFor='ShareInput'>http://localholst:3000/</label>
@@ -102,7 +114,7 @@ const Share = () => {
         onClick={createMob}
       >
         Save
-      </button><button onClick={e => getCurrentUrl(e)}>Share</button>
+      </button><button onClick={e => getCurrentUrl(e)}>Share</button><canvas ref={canvasRef}/>
       {/* TODO: do not allow user to save if their session is already from the db */}
     </div>
   )
