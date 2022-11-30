@@ -8,7 +8,7 @@ const Sound = () => {
   const [soundIsRefreshed, setSoundIsRefreshed] = useState(true)
 
   useEffect(() => {
-    fetch('/sounds')
+    fetch('/api/sounds')
       .then(result => result.json())
       .then(result => setSoundList(result))
   }, [setSoundList, soundIsRefreshed])
@@ -37,17 +37,16 @@ const Sound = () => {
     setSoundIsRefreshed(false)
     let formData = new FormData()
     formData.append('sound', soundFile)
-    const response = await fetch('/sounds', {
+    const response = await fetch('/api/sounds', {
       method: 'POST',
       body: formData,
     })
-      .then
     setSoundIsRefreshed(true)
   }
 
   return (
     soundIsRefreshed && <div className='Sound'>
-    
+
         <label className='Sound-lable' htmlFor='SoundSelector'>🎶 </label>
         <select name='SoundSelector'
           onChange={getSoundFunction}
@@ -69,7 +68,7 @@ const Sound = () => {
             <img src={playButton} alt='play' />
           </button>
 
-          
+
           <label className='Sound-input--label' htmlFor='SoundInput'>Upload your sound:</label>
           <input
             className='Sound-input'
@@ -82,7 +81,7 @@ const Sound = () => {
           <button className='submit' onClick={handleSoundUploadChange}>Submit</button>
         </>
       }
-        
+
     </div>
   )
 }

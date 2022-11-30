@@ -22,7 +22,7 @@ const Share = () => {
       "names": names,
       "autonext": autonext,
     }
-    await fetch('/mobs', {
+    await fetch('/api/mobs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ const Share = () => {
         "mob": mobName,
         "names": names,
       }
-      await fetch('/mobs', {
+      await fetch('/api/mobs', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ const Share = () => {
         "playing": playing,
         "autonext": autonext,
       }
-      await fetch('/mobs', {
+      await fetch('/api/mobs', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ const Share = () => {
         body: JSON.stringify(changedMob)
       })
     }
-    
+
     updateMobTime()
   }, [initialCounter, counter, playing, autonext])
 

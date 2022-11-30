@@ -10,5 +10,16 @@ services:
     volumes:
       - mongodb_data_container:/data/db
 
+  mobtimer:
+    build:
+      dockerfile: Dockerfile
+    environment:
+      MONGO_URI: "mongodb://root:rootpassword@mongodb_container:27017?authMechanism=DEFAULT"
+      PORT: 8080
+    ports:
+      - 80:8080
+    depends_on:
+      - mongodb_container
+
 volumes:
   mongodb_data_container:
