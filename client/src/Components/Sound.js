@@ -95,7 +95,7 @@ const Sound = () => {
               onChange={saveChanges}
               style={{ display: 'none' }}
               ref={hiddenFileInput}
-       
+
             />
             <button className='universal-button' onClick={handleSoundUploadChange}>Upload</button>
           </>

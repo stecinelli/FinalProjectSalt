@@ -194,7 +194,6 @@ const Timer = () => {
   useEffect(() => {
     if (playing) {
       startTimer()
-      console.log('startTimer useEffect')
     }
   }, [playing])
 

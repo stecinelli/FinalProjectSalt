@@ -52,9 +52,11 @@ const Share = () => {
         },
         body: JSON.stringify(changedMob)
       })
+      ('updateMobName', changedMob)
     }
 
-    updateMobName()
+    updateMobName() 
+
   }, [names])
 
   //function to copy url
