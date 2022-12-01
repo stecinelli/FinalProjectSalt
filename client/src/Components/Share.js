@@ -101,6 +101,7 @@ const Share = () => {
         }}
         onChange={e => setMobName(e.target.value)}
       />
+      <div className='save-and-share-buttons'>
       <button
         className='share__button--save universal-button'
         type='button'
@@ -141,6 +142,7 @@ const Share = () => {
           </div>
         )}
       </Popup>
+    </div>
     </div>
   )
 }

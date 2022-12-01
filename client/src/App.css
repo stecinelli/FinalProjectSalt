@@ -540,15 +540,7 @@ height: 35px;
   transform: rotate(45deg);
 }
 
-.share__container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #e95dff3b;
-  border-radius: 8px;
-  padding: 8px 8px 8px 0;
-}
+
 .Share-input {
   background-color: #e1f2ff;
   /* height: 100%; */
@@ -556,7 +548,7 @@ height: 35px;
   padding: 5px;
   background-color: #fffbf0;
   border: 2px dashed rgb(200, 200, 209);
-  margin-left: 8px;
+  /* margin-left: 8px; */
 
 }
 .share__popup {
@@ -690,6 +682,15 @@ a {
   border-radius: 100%;
   padding: 10px;
   cursor: pointer;
+}
+.share__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #e95dff3b;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 
