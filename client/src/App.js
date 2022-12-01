@@ -11,7 +11,7 @@ import MainContext from './Context';
 
 function App() {
 
-  const [mobName, setMobName] = useState('Binary cats')
+  const [mobName, setMobName] = useState('Mob timer')
   const [soundList, setSoundList] = useState([])
   const [initialCounter, setInitialCounter] = useState(300)
 
@@ -25,7 +25,6 @@ function App() {
   const [seconds, setSeconds] = useState('')
   const [autonext, setAutonext] = useState(true)
   const [timeModified, setTimeModified] = useState(false)
-  const [timerEndDate, setTimerEndDate] = useState('')
 
 
 
@@ -41,11 +40,10 @@ function App() {
       setNames(apiResult.names)
       setPlaying(apiResult.playing)
       setAutonext(apiResult.autonext)
-      setTimerEndDate(apiResult.timerEndDate)
       // TODO: memorize getters and setters to persist on localstorage
     }
 
-    if (queryMobName !== null || queryMobName!== 'Binary cats' ) fetchInitData()
+    if (queryMobName !== null) fetchInitData()
   }, [])
 
   // TODO: think abouth localStorage (if mobName do not exist get/save from/on localStorage)
@@ -64,7 +62,6 @@ function App() {
     seconds, setSeconds,
     autonext, setAutonext,
     timeModified, setTimeModified,
-    timerEndDate, setTimerEndDate,
   }
 
   return (
@@ -83,7 +80,7 @@ function App() {
       <Footer/>
     </div>
   </MainContext.Provider>
-);
+  );
 }
 
 export default App;

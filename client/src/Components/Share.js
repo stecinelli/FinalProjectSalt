@@ -10,9 +10,8 @@ const Share = () => {
   const { soundList } = useContext(MainContext)
   const { playing } = useContext(MainContext)
   const { initialCounter } = useContext(MainContext)
-  const { timerEndDate } = useContext(MainContext)
-  const { autonext } = useContext(MainContext)
   const { counter } = useContext(MainContext)
+  const { autonext } = useContext(MainContext)
   const canvasRef = useRef();
 
   const [url, setUrl] = useState(window.location.href);
@@ -22,11 +21,10 @@ const Share = () => {
       "mob": mobName,
       "sounds": soundList,
       "timeInitial": initialCounter,
+      "timeLeft": counter,
       "playing": playing,
       "names": names,
       "autonext": autonext,
-      "timeLeft": counter,
-      "timerEndDate": timerEndDate,
     }
     await fetch('/api/mobs', {
       method: 'POST',
@@ -52,12 +50,31 @@ const Share = () => {
         },
         body: JSON.stringify(changedMob)
       })
-      ('updateMobName', changedMob)
     }
 
-    updateMobName() 
-
+    updateMobName()
   }, [names])
+
+  useEffect(() => {
+    const updateMobTime = async () => {
+      const changedMob = {
+        "mob": mobName,
+        "timeInitial": initialCounter,
+        "timeLeft": counter,
+        "playing": playing,
+        "autonext": autonext,
+      }
+      await fetch('/api/mobs', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(changedMob)
+      })
+    }
+
+    updateMobTime()
+  }, [initialCounter, counter, playing, autonext])
 
   //function to copy url
   const getCurrentUrl = (e) => {
@@ -84,7 +101,6 @@ const Share = () => {
         }}
         onChange={e => setMobName(e.target.value)}
       />
-      <div className='save-and-share-buttons'>
       <button
         className='share__button--save universal-button'
         type='button'
@@ -112,7 +128,7 @@ const Share = () => {
               &times;
             </button>
             <div className="share__popup--content">
-              <button className="share__popup--button-copy universal-button" onClick={e => getCurrentUrl(e)}>Copy link</button>
+              <button className="share__popup--button-copy " onClick={e => getCurrentUrl(e)}>Copy link</button>
               <canvas ref={canvasRef}/>
               {/* <button
                 className="button"
@@ -125,7 +141,6 @@ const Share = () => {
           </div>
         )}
       </Popup>
-      </div>
     </div>
   )
 }
