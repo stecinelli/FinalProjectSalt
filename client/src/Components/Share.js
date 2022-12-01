@@ -59,27 +59,6 @@ const Share = () => {
 
   }, [names])
 
-  useEffect(() => {
-    const updateMobTime = async () => {
-      const changedMob = {
-        "mob": mobName,
-        "timeInitial": initialCounter,
-        "timeLeft": counter,
-        "playing": playing,
-        "autonext": autonext,
-      }
-      await fetch('/api/mobs', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(changedMob)
-      })
-    }
-
-    updateMobTime()
-  }, [initialCounter, counter, playing, autonext])
-
   //function to copy url
   const getCurrentUrl = (e) => {
     e.preventDefault()

@@ -25,6 +25,7 @@ function App() {
   const [seconds, setSeconds] = useState('')
   const [autonext, setAutonext] = useState(true)
   const [timeModified, setTimeModified] = useState(false)
+  const [timerEndDate, setTimerEndDate] = useState('')
 
 
 
@@ -40,6 +41,7 @@ function App() {
       setNames(apiResult.names)
       setPlaying(apiResult.playing)
       setAutonext(apiResult.autonext)
+      setTimerEndDate(apiResult.timerEndDate)
       // TODO: memorize getters and setters to persist on localstorage
     }
 
@@ -62,15 +64,14 @@ function App() {
     seconds, setSeconds,
     autonext, setAutonext,
     timeModified, setTimeModified,
+    timerEndDate, setTimerEndDate,
   }
 
   return (
     <MainContext.Provider value={context}>
     <div className="App">
       <h3 className='hello'>{`${mobName} timer`}</h3>
-
         <Timer />
-
       <div className='names-and-wish-container'>
         <Names />
         <FunnyWish />
@@ -79,7 +80,6 @@ function App() {
         <Sound />
       <Share />
       </div>
-
       <Footer/>
     </div>
   </MainContext.Provider>

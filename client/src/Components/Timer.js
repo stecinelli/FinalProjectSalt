@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
+import { formatISO, parseISO, addSeconds, addMinutes, differenceInSeconds } from 'date-fns'
 import playButton from './Buttons/play-button-black.png'
 import stopButton from './Buttons/stop-button-black.png'
 import pauseButton from './Buttons/pause-button-black.png'
@@ -23,12 +24,18 @@ const Timer = () => {
   const { seconds, setSeconds } = useContext(MainContext)
   const { autonext, setAutonext } = useContext(MainContext)
   const { timeModified, setTimeModified } = useContext(MainContext)
+  const { timerEndDate, setTimerEndDate } = useContext(MainContext)
   //getting names from the context to change them
   const { names, setNames } = useContext(MainContext)
+  const { mobName } = useContext(MainContext)
 
   //  checking [counter] every time it changes. handling transition.
   useEffect(() => {
-    if (counter === -1) {
+    if (counter === undefined || playing) {
+      const secondsLeft = differenceInSeconds(parseISO(timerEndDate), new Date())
+      setCounter(secondsLeft < 0 ? 0 : secondsLeft)
+    }
+    else if (counter === -1) {
       if (isChanging) {
         setCounter(selectedTime)
         setIsChanging(false)
@@ -69,7 +76,36 @@ const Timer = () => {
     if (secs <= 9) { secs = '0' + Number(secs) }
     setMinutes(mins)
     setSeconds(secs)
-  }, [counter]);
+  }, [counter])
+
+  const patchMob = () => {
+    if (!mobName || mobName === 'Mob timer') return
+
+    const changedMob = {
+      "mob": mobName,
+      "timerEndDate": timerEndDate,
+      "playing": playing,
+      "autonext": autonext,
+      "timeLeft": counter,
+    }
+
+    fetch('/api/mobs', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(changedMob)
+    })
+  }
+
+  const fetchMob = async () => {
+    return fetch(`/api/mobs/${mobName}`, { method: 'GET' }).then(r => r.json())
+  }
+
+  useEffect(() => {
+    patchMob()
+  }, [timerEndDate, mobName, playing, autonext])
+
   //getting whatever they typed and setting it as new time, setTimeModified- when we hit play we want to know if we interacted with the time so we set a new time
   const editTimerMinutes = (newMinutes) => {
     setMinutes(newMinutes)
@@ -108,13 +144,21 @@ const Timer = () => {
     /> : <input className='inputTimer' type="text" value={seconds} onBlur={e => adjustTime()} onChange={e => editTimerSeconds(e.target.value)} /> </>
   }
 
+  // calculate the end date from the minutes and seconds set up
+  const setCalculatedTimerEndDate = () => {
+    const endDate = addSeconds(addMinutes(new Date(), minutes), seconds + 1)
+    setTimerEndDate(formatISO(endDate))
+  }
+
   const startTimer = () => {
+
     //we see where the current mins and secs are and calculate new counter value.
     if (timeModified) {
       //calculating number of seconds
       const newTime = 60 * Number(minutes) + Number(seconds)
       //setting counter
-      setCounter(newTime)
+      const secondsLeft = differenceInSeconds(parseISO(timerEndDate), new Date())
+      setCounter(secondsLeft)
       //when we start the clock again we will see new time, we also need this for the circle
       setSelectedTime(newTime)
       //then it's no longer modified - we only want true after we edited it otherwise when we press pause and play again it would reset the newTime
@@ -124,8 +168,23 @@ const Timer = () => {
     //clearing the interval - ref holds the id of the interval. if we didnt have this it would speed up every time we clicked start
     if (Ref.current) clearInterval(Ref.current);
     // calling a function that reduces out counter by one every second. setting minimum of -1 (we had zero before but didn't work)
-    const id = setInterval(() => {
-      setCounter(count => Math.max(-1, count - 1))
+    const id = setInterval(async () => {
+      const secondsLeft = differenceInSeconds(parseISO(timerEndDate), new Date())
+      setCounter(secondsLeft)
+
+      if (!mobName || mobName === 'Mob timer') return
+
+      const apiResult = await fetchMob()
+      setCounter(apiResult.timeLeft)
+      setNames(apiResult.names)
+      setPlaying(apiResult.playing)
+      setAutonext(apiResult.autonext)
+      setTimerEndDate(apiResult.timerEndDate)
+
+      if (playing === apiResult.playing) return
+
+      if (apiResult.playing) startTimer()
+      else stopTimer()
     }, 1000)
     // this is useful for pausing, clearing and starting timer. it will allow us to call clear interval function
     Ref.current = id;
@@ -146,7 +205,7 @@ const Timer = () => {
 
   const stopTimer = () => {
     pauseTimer()
-    setCounter(selectedTime)
+    //setCounter(selectedTime)
   }
   //my button alternates between stop and start based on state.
   // for now all we do with playing is set the button
@@ -157,7 +216,7 @@ const Timer = () => {
     </button>;
 
   } else {
-    button = <button className='buttons-for-start-and-stop' onClick={startTimer}>
+    button = <button className='buttons-for-start-and-stop' onClick={() => { setCalculatedTimerEndDate(); startTimer() }}>
       <img src={playButton} alt='play' />
     </button>;
   }
@@ -169,6 +228,8 @@ const Timer = () => {
       setCounter(count => count + 60)
       setSelectedTime(counter)
       setTimeModified(true)
+      patchMob()
+      setCalculatedTimerEndDate()
     }
   }
 
@@ -179,6 +240,8 @@ const Timer = () => {
       }
       setSelectedTime(counter)
       setTimeModified(true)
+      patchMob()
+      setCalculatedTimerEndDate()
     }
   }
 
@@ -189,6 +252,8 @@ const Timer = () => {
       }
       setSelectedTime(counter)
       setTimeModified(true)
+      patchMob()
+      setCalculatedTimerEndDate()
     }
   }
 
@@ -197,6 +262,8 @@ const Timer = () => {
       setCounter(count => count + 1)
       setSelectedTime(counter)
       setTimeModified(true)
+      patchMob()
+      setCalculatedTimerEndDate()
     }
   }
 
