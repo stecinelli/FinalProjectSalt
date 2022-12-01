@@ -11,9 +11,9 @@ import MainContext from './Context';
 
 function App() {
 
-  const [mobName, setMobName] = useState('Mob timer')
+  const [mobName, setMobName] = useState('Binary cats')
   const [soundList, setSoundList] = useState([])
-  const [initialCounter, setInitialCounter] = useState(5)
+  const [initialCounter, setInitialCounter] = useState(300)
 
   const [counter, setCounter] = useState(initialCounter)
   const [playing, setPlaying] = useState(false)
@@ -43,7 +43,7 @@ function App() {
       // TODO: memorize getters and setters to persist on localstorage
     }
 
-    if (queryMobName !== null) fetchInitData()
+    if (queryMobName !== null || queryMobName!== 'Binary cats' ) fetchInitData()
   }, [])
 
   // TODO: think abouth localStorage (if mobName do not exist get/save from/on localStorage)
@@ -66,21 +66,24 @@ function App() {
 
   return (
     <MainContext.Provider value={context}>
-      <div className="App">
-        <h3 className='hello'>{`${mobName} mob`}</h3>
-        <div className='timer-and-sound'>
-          <Timer />
-          <Sound />
-        </div>
-        <div className='names-and-wish-container'>
-          <Names />
-          <FunnyWish />
-        </div>
-        <Share />
-        <Footer/>
+    <div className="App">
+      <h3 className='hello'>{`${mobName} timer`}</h3>
+
+        <Timer />
+
+      <div className='names-and-wish-container'>
+        <Names />
+        <FunnyWish />
       </div>
-    </MainContext.Provider>
-  );
+      <div className='sound-and-share'>
+        <Sound />
+      <Share />
+      </div>
+
+      <Footer/>
+    </div>
+  </MainContext.Provider>
+);
 }
 
 export default App;

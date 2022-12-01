@@ -10,8 +10,6 @@ import MainContext from '../Context'
 
 const Names = () => {
   const { names, setNames } = useContext(MainContext)
-  const { mobName } = useContext(MainContext)
-  const { isChanging, setIsChanging } = useContext(MainContext)
   // const [idToToggle, setIdToToggle] = useState('')
   // const [isActive, setIsActive] = useState(false)
 

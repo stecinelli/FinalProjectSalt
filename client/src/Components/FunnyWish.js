@@ -51,7 +51,7 @@ function FunnyWish() {
     return (
         <div className='funnyWish'>
             <div className='wish-and-button'>
-                <p className='luck'>Good luck, {changeActiveName()}!</p>
+                <p className='luck'>Your turn, {changeActiveName()}!</p>
                 <button className='funnyWish-button' onClick={handleFetch}>
                     <img src={refreshButton} alt='refresh' />
                 </button>
