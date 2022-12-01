@@ -11,7 +11,7 @@ import MainContext from './Context';
 
 function App() {
 
-  const [mobName, setMobName] = useState('Mob timer')
+  const [mobName, setMobName] = useState('Binary cats')
   const [soundList, setSoundList] = useState([])
   const [initialCounter, setInitialCounter] = useState(300)
 
