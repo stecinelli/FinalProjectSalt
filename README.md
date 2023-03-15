@@ -21,6 +21,6 @@ This website was entirely developed with JavaScript, NodeJS and React. It has co
 
 It was deployed on AWS and available in this link:
 
-http://ec2-16-171-2-140.eu-north-1.compute.amazonaws.com/?mob=the_deploy_is_done
+http://ec2-16-171-2-140.eu-north-1.compute.amazonaws.com/
 
 Follow the link and have a good programming!  😉
