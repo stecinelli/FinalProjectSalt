@@ -4,6 +4,8 @@
 
 This is MOB timer website!
 
+<img src="/Screenshot Web - Mob Timer.jpg" alt="Screenshot Web" title="Screenshot Web" width="30%" height="30%"/> &nbsp; <img src="/Screenshot Mobile - Mob Timer.jpg" alt="Screenshot Web" title="Screenshot Web" width="13%" height="13%"/>
+
 The site consists of a timer that can be adjusted for as many minutes as you want. This timer will triggers an alarm at the end of the requested time, and you can upload the sound of your preference or you can choose one from the available sounds.
 In addition, the website also controls which group member will be the next to control the keyboard, facilitating the organization of a team that wants to work on MOB programming.
 Last but not least you may save your team configuration and also can scan a QR code to share the MOB timer with everyone.
